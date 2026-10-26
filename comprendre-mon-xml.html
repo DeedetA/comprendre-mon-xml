@@ -1,0 +1,1829 @@
+<title>Synthèse RE2020</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400..600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : un cartouche de plan adouci en tête, puis trois lectures du même dossier :
+   « L'essentiel », « Analyse détaillée » et « Charges énergétiques ». Fond crème, encre brun chaud, accent sauge. */
+:root {
+  --bg: #f5efe4;
+  --surface: #fbf8f2;
+  --surface-2: #efe7d9;
+  --ink: #3b342c;
+  --ink-2: #6a6056;
+  --muted: #94897c;
+  --line: #e6dccc;
+  --line-strong: #d2c4ae;
+  --accent: #5b7154;
+  --accent-ink: #fbf8f2;
+  --accent-soft: #e4e8d8;
+  --ok: #4f7a4c;   --ok-soft: #e3ebd9; --ok-mark: #9bb98e;
+  --warn: #9a6a1f; --warn-soft: #f3e5c6; --warn-mark: #e0b664;
+  --bad: #a9503f;  --bad-soft: #f3ddd4; --bad-mark: #d98d7a;
+  --s1: #3f78b5; --s2: #d4703c; --s3: #7564c4; --s4: #2f9a72; --s5: #d59a25; --s6: #cc6a90; --s7: #6a9030;
+  --t1: #eab496; --t2: #d4703c; --t3: #9c4c22;
+  --bar: #8ea585; --bar-neg: #c9b79c;
+  --threshold: #3b342c;
+  --before: #cdbb9f;
+  --dpe-a: #009c6d; --dpe-a-ink: #ffffff; --dpe-b: #52b153; --dpe-b-ink: #ffffff; --dpe-c: #a5cc74; --dpe-c-ink: #1f2a12; --dpe-d: #f4e70f; --dpe-d-ink: #2b2a10;
+  --dpe-e: #f0b50f; --dpe-e-ink: #2b2210; --dpe-f: #eb8235; --dpe-f-ink: #2b1a0c; --dpe-g: #d7221f; --dpe-g-ink: #ffffff;
+  --ges-a: #f6edfd; --ges-a-ink: #3a2a4a; --ges-b: #e4c7f5; --ges-b-ink: #3a2a4a; --ges-c: #d5aaf6; --ges-c-ink: #3a2a4a; --ges-d: #cb95f3; --ges-d-ink: #2e1d3d;
+  --ges-e: #ba72ef; --ges-e-ink: #24142f; --ges-f: #a74deb; --ges-f-ink: #ffffff; --ges-g: #8a19df; --ges-g-ink: #ffffff;
+  --shadow: 0 1px 2px rgba(59,52,44,.04), 0 6px 20px rgba(59,52,44,.05);
+  --f-display: "Literata", Georgia, "Times New Roman", serif;
+  --f-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 12px;
+  --r-s: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1f1c18; --surface: #28241f; --surface-2: #322d27; --ink: #ede5d8; --ink-2: #c4b9a9; --muted: #8f8577;
+    --line: #3a342d; --line-strong: #564d42; --accent: #a7bd99; --accent-ink: #1f1c18; --accent-soft: #343a2c;
+    --ok: #a7c99a; --ok-soft: #2c3527; --ok-mark: #7f9f73; --warn: #e6c27a; --warn-soft: #3c3220; --warn-mark: #c99a45;
+    --bad: #e8a393; --bad-soft: #3e2a24; --bad-mark: #c07563;
+    --s1: #4f8ac9; --s2: #cc6c33; --s3: #8676d6; --s4: #36a67b; --s5: #bd8b1f; --s6: #c56a8e; --s7: #7da23e;
+    --t1: #e8a37c; --t2: #cc6c33; --t3: #8f4520;
+    --bar: #8aa27f; --bar-neg: #6b5f4e; --threshold: #ede5d8; --before: #6b5f4e;
+    --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1f1c18; --surface: #28241f; --surface-2: #322d27; --ink: #ede5d8; --ink-2: #c4b9a9; --muted: #8f8577;
+  --line: #3a342d; --line-strong: #564d42; --accent: #a7bd99; --accent-ink: #1f1c18; --accent-soft: #343a2c;
+  --ok: #a7c99a; --ok-soft: #2c3527; --ok-mark: #7f9f73; --warn: #e6c27a; --warn-soft: #3c3220; --warn-mark: #c99a45;
+  --bad: #e8a393; --bad-soft: #3e2a24; --bad-mark: #c07563;
+  --s1: #4f8ac9; --s2: #cc6c33; --s3: #8676d6; --s4: #36a67b; --s5: #bd8b1f; --s6: #c56a8e; --s7: #7da23e;
+  --t1: #e8a37c; --t2: #cc6c33; --t3: #8f4520;
+  --bar: #8aa27f; --bar-neg: #6b5f4e; --threshold: #ede5d8; --before: #6b5f4e;
+  --shadow: none; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 72px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.2; font-weight: 500; }
+h2 { font-size: 1.6rem; letter-spacing: -.005em; }
+h3 { font-size: 1.12rem; }
+p { margin: 0; }
+b, strong { font-weight: 600; }
+.mono { font-family: var(--f-mono); }
+.num { font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: .76rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* Barre d'outil */
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 22px 16px; }
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand h1 { font-size: 1.45rem; font-weight: 500; }
+.brand .tag { font-size: .85rem; color: var(--muted); }
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line-strong); background: var(--surface); padding: 8px 16px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: .93rem; color: var(--ink-2); transition: border-color .15s, color .15s; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.primary:hover { filter: brightness(1.06); color: var(--accent-ink); }
+.btn.ghost { border-color: transparent; background: transparent; padding-inline: 8px; }
+.btn svg { width: 16px; height: 16px; }
+
+/* Zone de dépôt */
+.drop { border: 1.5px dashed var(--line-strong); border-radius: var(--r); background: var(--surface); padding: 32px 20px; display: grid; gap: 10px; justify-items: center; text-align: center; transition: border-color .15s, background .15s; }
+.drop.compact { padding: 10px 18px; display: flex; justify-content: space-between; align-items: center; text-align: left; flex-wrap: wrap; border-style: dashed; }
+.drop.over { border-color: var(--accent); background: var(--accent-soft); }
+.drop .hint { color: var(--ink-2); font-size: .95rem; overflow-wrap: anywhere; }
+#drop-body { min-width: 0; max-width: 100%; }
+.drop .privacy { font-size: .84rem; color: var(--muted); }
+.notice { margin-top: 10px; padding: 10px 14px; border-radius: var(--r-s); background: var(--bad-soft); color: var(--bad); font-weight: 600; }
+.sample-flag { display: inline-flex; align-items: center; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; background: var(--warn-soft); color: var(--warn); padding: 2px 9px; border-radius: 999px; font-weight: 700; margin-right: 6px; }
+
+/* Cartouche */
+.cartouche { margin-top: 18px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r); overflow: hidden; display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); box-shadow: var(--shadow); }
+.cartouche > div { padding: 12px 16px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.cartouche .c-title { grid-row: span 2; display: grid; align-content: space-between; gap: 12px; padding: 16px 20px; }
+.cartouche .c-title h2 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); margin-top: 2px; }
+.cartouche .c-title .addr { color: var(--ink-2); }
+.cartouche .lbl { display: block; font-size: .7rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 2px; }
+.cartouche .val { font-weight: 600; overflow-wrap: anywhere; line-height: 1.4; }
+.cartouche .val small { font-weight: 400; color: var(--ink-2); }
+.cartouche .kpis { display: flex; gap: 24px; flex-wrap: wrap; }
+.cartouche .kpis b { font-family: var(--f-display); font-weight: 500; font-size: 1.55rem; display: block; line-height: 1.1; }
+.cartouche .kpis span { font-size: .82rem; color: var(--ink-2); }
+
+/* Navigation */
+.controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--surface-2); flex-wrap: wrap; }
+.seg button { border: 0; background: transparent; padding: 6px 15px; cursor: pointer; font-weight: 600; font-size: .92rem; color: var(--ink-2); border-radius: 999px; transition: background .15s, color .15s; }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(59,52,44,.12); }
+.seg.mode button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); box-shadow: none; }
+
+section.block { margin-top: 36px; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.block-head { display: flex; justify-content: space-between; align-items: end; gap: 12px; flex-wrap: wrap; }
+.lede { color: var(--ink-2); max-width: 68ch; }
+
+/* Verdict */
+.verdict { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: center; background: var(--surface); border-radius: var(--r); padding: 22px 24px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.verdict .stamp { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; }
+.verdict .stamp svg { width: 30px; height: 30px; }
+.verdict.ok .stamp { color: var(--ok); background: var(--ok-soft); } .verdict.warn .stamp { color: var(--warn); background: var(--warn-soft); }
+.verdict.bad .stamp { color: var(--bad); background: var(--bad-soft); } .verdict.na .stamp { color: var(--muted); background: var(--surface-2); }
+.verdict h3 { font-size: 1.35rem; }
+.verdict p { color: var(--ink-2); margin-top: 6px; }
+.matrix { overflow-x: auto; background: var(--surface); border-radius: var(--r); border: 1px solid var(--line); }
+.matrix table { border-collapse: collapse; width: 100%; min-width: 600px; }
+.matrix th, .matrix td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: center; font-size: .92rem; }
+.matrix tr:last-child td { border-bottom: 0; }
+.matrix th:first-child, .matrix td:first-child { text-align: left; white-space: nowrap; }
+.matrix thead th { font-weight: 600; color: var(--ink-2); font-size: .8rem; line-height: 1.3; }
+.matrix thead th small { display: block; font-family: var(--f-mono); font-weight: 400; color: var(--muted); font-size: .7rem; }
+
+/* Pastilles de statut */
+.pill { display: inline-flex; align-items: center; gap: 5px; padding: 2px 10px 2px 8px; border-radius: 999px; font-size: .8rem; font-weight: 600; white-space: nowrap; }
+.pill svg { width: 12px; height: 12px; flex: none; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.na { background: var(--surface-2); color: var(--muted); }
+
+/* Cartes indicateurs */
+.themes { display: grid; gap: 26px; }
+.theme-row { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 18px; align-items: start; }
+.theme-row > header { padding-top: 8px; border-top: 1px solid var(--line-strong); }
+.theme-row > header h3 { font-size: 1.3rem; }
+.theme-row > header p { font-size: .9rem; color: var(--ink-2); margin-top: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.card .top { display: flex; justify-content: space-between; align-items: start; gap: 8px; }
+.card h4 { margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 1.1rem; line-height: 1.25; }
+.card .tech { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); }
+.card .expl { font-size: .9rem; color: var(--ink-2); }
+.card .figure { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.card .figure b { font-family: var(--f-display); font-size: 2rem; font-weight: 500; line-height: 1; }
+.card .figure span { color: var(--ink-2); font-size: .9rem; }
+.card .say { font-size: .92rem; }
+
+/* Jauge valeur / seuil */
+.gauge { position: relative; height: 40px; margin-top: 4px; }
+.gauge .track { position: absolute; left: 0; right: 0; top: 11px; height: 10px; background: var(--surface-2); border-radius: 999px; }
+.gauge .fill { position: absolute; left: 0; top: 11px; height: 10px; border-radius: 999px; }
+.gauge .fill.ok { background: var(--ok-mark); } .gauge .fill.warn { background: var(--warn-mark); } .gauge .fill.bad { background: var(--bad-mark); } .gauge .fill.na { background: var(--muted); }
+.gauge .tick { position: absolute; top: 5px; width: 0; height: 22px; border-left: 2px solid var(--threshold); border-radius: 2px; }
+.gauge .tick.soft { border-left: 1.5px dotted var(--muted); }
+.gauge .tick-lbl { position: absolute; top: 27px; font-family: var(--f-mono); font-size: .68rem; color: var(--ink-2); white-space: nowrap; transform: translateX(-50%); }
+.gauge .tick-lbl.end { transform: translateX(-100%); }
+.gauge .tick-lbl.start { transform: none; }
+
+/* Phrases clés */
+.facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 14px; }
+.fact { background: var(--surface); border: 1px solid var(--line); padding: 14px 18px; border-radius: var(--r); }
+.fact .eyebrow { margin-bottom: 6px; color: var(--accent); }
+.fact p { font-size: .95rem; }
+.fact a { color: var(--accent); }
+.regime { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); letter-spacing: .06em; }
+.linkbtn { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* Escalier carbone */
+.stairs-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: grid; gap: 14px; }
+.stairs { position: relative; height: 220px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: end; margin-left: 46px; border-bottom: 1px solid var(--line-strong); }
+.stairs .step { position: relative; background: var(--surface-2); border-top: 2px solid var(--line-strong); border-radius: 6px 6px 0 0; }
+.stairs .step.current { background: var(--accent-soft); border-top-color: var(--accent); }
+.stairs .proj { position: absolute; left: -46px; right: 0; border-top: 2px dashed var(--s2); }
+.stairs .proj span { position: absolute; left: 0; top: -24px; font-size: .78rem; font-weight: 700; color: var(--s2); background: var(--surface); padding-right: 6px; }
+.stairs-x { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-left: 46px; }
+.stairs-x div { text-align: center; display: grid; gap: 4px; justify-items: center; align-content: start; min-width: 0; }
+.stairs-x .pill { white-space: normal; text-align: left; }
+.stairs-x b { font-family: var(--f-display); font-weight: 500; }
+
+/* Analyse détaillée */
+.subnav { display: flex; gap: 6px; flex-wrap: wrap; }
+.subnav a { font-size: .86rem; color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); background: var(--surface); padding: 4px 12px; border-radius: 999px; }
+.subnav a:hover { border-color: var(--accent); color: var(--accent); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 12px; min-width: 0; align-content: start; grid-template-columns: minmax(0, 1fr); }
+.panel h3 { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.panel h3 small { font-family: var(--f-mono); font-weight: 400; font-size: .72rem; color: var(--muted); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 16px; }
+.note { font-size: .83rem; color: var(--muted); }
+.tbl { overflow-x: auto; }
+.tbl table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.tbl th, .tbl td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.tbl thead th { font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+.tbl td.r, .tbl th.r { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl tbody tr:hover { background: var(--surface-2); }
+.tbl tr.sub td { color: var(--ink-2); font-size: .86rem; }
+.tbl tr.sub td:first-child { padding-left: 26px; }
+.tbl tr.total td { font-weight: 600; border-top: 1px solid var(--line-strong); }
+
+/* Barres horizontales */
+.hbars { display: grid; gap: 8px; }
+.hbar { display: grid; grid-template-columns: minmax(120px, 1.1fr) minmax(0, 2fr) 96px; gap: 12px; align-items: center; font-size: .9rem; }
+.hbar .name { min-width: 0; overflow-wrap: anywhere; line-height: 1.3; }
+.hbar .name small { display: block; color: var(--muted); font-size: .76rem; }
+.hbar .bar { position: relative; height: 12px; }
+.hbar .bar i { position: absolute; top: 0; height: 100%; background: var(--bar); border-radius: 0 999px 999px 0; }
+.hbar .bar i.neg { background: var(--bar-neg); border-radius: 999px 0 0 999px; }
+.hbar .bar .zero { position: absolute; top: -3px; bottom: -3px; border-left: 1px solid var(--line-strong); }
+.hbar .v { text-align: right; font-variant-numeric: tabular-nums; font-size: .88rem; }
+.hbar .v small { display: block; color: var(--muted); font-size: .74rem; }
+
+.stack { display: flex; height: 22px; border-radius: 999px; overflow: hidden; gap: 2px; background: var(--surface); }
+.stack i { display: block; height: 100%; min-width: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .86rem; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+.chart-box { position: relative; height: 260px; }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font-size: .83rem; background: var(--surface-2); padding: 3px 12px; border-radius: 999px; color: var(--ink-2); }
+.chip b { font-variant-numeric: tabular-nums; color: var(--ink); }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.filters input, .filters select { font: inherit; font-size: .9rem; padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--ink); min-width: 0; }
+.filters input { flex: 1 1 220px; }
+.filters select { max-width: 100%; flex: 1 1 180px; }
+
+/* Charges énergétiques */
+.cost-layout { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 18px; align-items: start; }
+.levers { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 70px); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 18px; }
+.levers h3 { font-size: 1.15rem; }
+.levers .group { display: grid; gap: 14px; }
+.levers .group + .group { border-top: 1px solid var(--line); padding-top: 16px; }
+.levers .group > .eyebrow { margin-bottom: -4px; }
+.lever { display: grid; gap: 4px; }
+.lever .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.lever label { font-weight: 600; font-size: .93rem; }
+.lever output { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.lever .ref { font-size: .76rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+.lever .ref.changed { color: var(--warn); }
+.check { display: flex; gap: 10px; align-items: start; font-size: .92rem; cursor: pointer; }
+.check input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; margin: 0; }
+input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(to right, var(--accent) 0 var(--p, 50%), var(--surface-2) var(--p, 50%) 100%); }
+input[type="range"]::-moz-range-track { height: 6px; border-radius: 999px; background: var(--surface-2); }
+input[type="range"]::-moz-range-progress { height: 6px; border-radius: 999px; background: var(--accent); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); margin-top: -7px; box-shadow: 0 1px 3px rgba(59,52,44,.2); }
+input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.hero-cost { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; display: grid; gap: 18px; box-shadow: var(--shadow); }
+.hero-cost .main { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.hero-cost .main b { font-family: var(--f-display); font-weight: 500; font-size: clamp(2.2rem, 5vw, 3rem); line-height: 1; }
+.hero-cost .main span { color: var(--ink-2); }
+.hero-cost .delta { font-size: .9rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
+.hero-cost .delta.up { background: var(--bad-soft); color: var(--bad); }
+.hero-cost .delta.down { background: var(--ok-soft); color: var(--ok); }
+.hero-cost .delta.same { background: var(--surface-2); color: var(--muted); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+.stats > div { border-top: 1px solid var(--line); padding-top: 8px; }
+.stats b { font-family: var(--f-display); font-weight: 500; font-size: 1.3rem; display: block; line-height: 1.2; }
+.stats span { font-size: .84rem; color: var(--ink-2); }
+.tornado { display: grid; gap: 10px; }
+.tor { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(0, 2fr); gap: 12px; align-items: center; font-size: .9rem; }
+.tor .name small { display: block; color: var(--muted); font-size: .76rem; }
+.tor .bar { position: relative; height: 26px; }
+.tor .bar .base { position: absolute; top: -4px; bottom: -4px; border-left: 1.5px solid var(--ink-2); }
+.tor .bar i { position: absolute; top: 5px; height: 16px; }
+.tor .bar i.lo { background: var(--ok-mark); border-radius: 999px 0 0 999px; }
+.tor .bar i.hi { background: var(--bad-mark); border-radius: 0 999px 999px 0; }
+.tor .bar em { position: absolute; top: 4px; font-style: normal; font-size: .74rem; font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap; }
+.callout { background: var(--accent-soft); border-radius: var(--r); padding: 14px 18px; font-size: .92rem; color: var(--ink); }
+
+
+/* Existant : avant / après */
+.ba { display: grid; gap: 10px; }
+.ba-row { display: grid; grid-template-columns: 120px minmax(0, 1fr) 80px; gap: 10px; align-items: center; font-size: .92rem; }
+.ba-row b { text-align: right; }
+.ba-bar { height: 12px; background: var(--surface-2); border-radius: 999px; position: relative; overflow: hidden; }
+.ba-bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; }
+i.before { background: var(--before); } i.after { background: var(--accent); } i.ref { background: transparent; border: 1.5px dashed var(--ink-2); }
+.ba-gain { font-size: .98rem; } .ba-gain b { font-family: var(--f-display); font-size: 1.5rem; font-weight: 500; color: var(--ok); }
+.ba-usages { display: grid; gap: 10px; }
+.bau { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr) 84px 56px; gap: 10px; align-items: center; font-size: .9rem; }
+.ba-bars { display: grid; gap: 3px; } .ba-bars .ba-bar { height: 9px; }
+.ba-v { text-align: right; font-size: .8rem; line-height: 1.25; color: var(--ink-2); }
+.ba-d { font-size: .8rem; font-weight: 600; text-align: right; } .ba-d.down { color: var(--ok); } .ba-d.up { color: var(--bad); }
+.before-line { font-size: .88rem; color: var(--ink-2); }
+.ul { margin: 4px 0 8px; padding-left: 18px; display: grid; gap: 4px; font-size: .92rem; }
+/* DPE : étiquettes et calendrier */
+.dpe-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; display: grid; gap: 20px; box-shadow: var(--shadow); }
+.dpe-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+.dpe-big { width: 76px; height: 76px; border-radius: 18px; display: grid; place-items: center; font-family: var(--f-display); font-size: 2.6rem; font-weight: 600; }
+.dpe-head h3 { font-size: 1.35rem; } .dpe-head p { color: var(--ink-2); margin-top: 4px; }
+.scale { display: grid; gap: 4px; margin-top: 10px; }
+.sc-row { display: flex; align-items: center; gap: 10px; opacity: .5; }
+.sc-row.on { opacity: 1; }
+.sc-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 24px; padding: 0 10px; border-radius: 4px 14px 14px 4px; font-size: .76rem; min-width: 0; flex: none; }
+.sc-row.on .sc-bar { height: 34px; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--ink); }
+.sc-bar b { font-size: .95rem; } .sc-bar small { font-variant-numeric: tabular-nums; white-space: nowrap; font-size: .72rem; }
+.sc-mark { font-size: .82rem; white-space: nowrap; color: var(--ink-2); } .sc-mark b { font-family: var(--f-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); }
+.cal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.cal-step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 8px; justify-items: start; }
+.cal-step.hit { border-color: var(--bad-mark); background: var(--bad-soft); }
+.cal-c { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; font-weight: 700; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 18px; border-radius: 999px; font-size: .9rem; z-index: 20; }
+footer.foot { margin-top: 48px; font-size: .84rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 4px; }
+
+@media (max-width: 900px) {
+  .cost-layout { grid-template-columns: minmax(0, 1fr); }
+  .levers { position: static; }
+}
+@media (max-width: 860px) {
+  .cartouche { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .cartouche .c-title { grid-column: 1 / -1; grid-row: auto; }
+  .theme-row { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .cal { grid-template-columns: minmax(0, 1fr); }
+  .bau { grid-template-columns: minmax(0, 1fr) 76px 48px; } .bau .ba-bars { grid-column: 1 / -1; grid-row: 2; }
+  .ba-row { grid-template-columns: 96px minmax(0, 1fr) 70px; }
+  .sc-bar small { display: none; }
+  .dpe-head { grid-template-columns: minmax(0, 1fr); }
+  .verdict { grid-template-columns: minmax(0, 1fr); }
+  .hbar { grid-template-columns: minmax(0, 1fr) 84px; }
+  .hbar .bar { grid-column: 1 / -1; grid-row: 2; }
+  .tor { grid-template-columns: minmax(0, 1fr); }
+  .stairs, .stairs-x { margin-left: 0; gap: 4px; }
+  .stairs .proj { left: 0; }
+  .stairs-x b { font-size: .8rem; }
+  .stairs-x .pill { font-size: .72rem; padding: 2px 6px; }
+  .seg button { padding: 6px 11px; font-size: .88rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gauge .fill, .hbar .bar i { transition: width .5s ease; }
+}
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand"><h1>Synthèse thermique</h1><span class="tag">RE2020 · RT2012 · RT existant · DPE</span></div>
+    <button class="btn" id="btn-open" type="button" hidden>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 11V2M4.5 5.5 8 2l3.5 3.5M2 10v3.5h12V10"/></svg>
+      Ouvrir un autre fichier
+    </button>
+  </div>
+
+  <div class="drop" id="drop">
+    <div id="drop-body"></div>
+    <input type="file" id="file" accept=".xml,text/xml,application/xml" hidden>
+  </div>
+  <div class="notice" id="error" hidden></div>
+
+  <main id="app"></main>
+
+  <footer class="foot">
+    <p>Lecture conventionnelle des résultats réglementaires (RE2020, RT2012, RT existant) et des DPE : ces chiffres ne sont pas une prévision de consommation réelle ni de facture.</p>
+    <p>Le fichier est lu dans votre navigateur. Il n'est envoyé à aucun serveur.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script id="sample" type="application/json">__SAMPLE__</script>
+<script>
+"use strict";
+/* ========================================================================
+   1. LECTURE DU XML  (indépendante de l'affichage : réutilisable telle quelle)
+   ======================================================================== */
+const kids = (el, tag) => el ? Array.from(el.children).filter(c => c.localName === tag) : [];
+const kid = (el, tag) => el ? (Array.from(el.children).find(c => c.localName === tag) || null) : null;
+const at = (el, ...tags) => { for (const t of tags) { el = kid(el, t); if (!el) return null; } return el; };
+const txt = (el, tag) => { const k = tag ? kid(el, tag) : el; return k ? k.textContent.trim() : ''; };
+const num = (el, tag) => { const s = txt(el, tag); if (s === '') return null; const v = parseFloat(s.replace(',', '.')); return Number.isFinite(v) ? v : null; };
+function monthly(el, tag) {
+  const m = kid(el, tag); if (!m) return null;
+  const arr = new Array(12).fill(0);
+  kids(m, 'Sortie_Mensuelle').forEach(s => { const i = num(s, 'Mois'); if (i >= 1 && i <= 12) arr[i - 1] = num(s, 'Valeur') || 0; });
+  return arr;
+}
+const addArr = (a, b) => a.map((v, i) => v + ((b && b[i]) || 0));
+function leaves(el) { const o = {}; if (!el) return o; for (const c of el.children) if (c.children.length === 0) { const v = parseFloat(c.textContent); o[c.localName] = Number.isFinite(v) ? v : c.textContent.trim(); } return o; }
+function dynSum(el) {
+  const d = kid(el, 'indicateur_co2_dynamique'); const o = {};
+  kids(d, 'valeur_phase_acv').forEach(v => { o[v.getAttribute('ref')] = parseFloat(v.textContent) || 0; });
+  return o;
+}
+const sumObj = o => Object.values(o).reduce((a, b) => a + b, 0);
+
+function decodeXML(buffer) {
+  const head = new TextDecoder('ascii').decode(buffer.slice(0, 200));
+  const m = head.match(/encoding=["']([^"']+)["']/i);
+  let enc = m ? m[1].toLowerCase() : 'utf-8';
+  try { return new TextDecoder(enc).decode(buffer); } catch (e) { return new TextDecoder('utf-8').decode(buffer); }
+}
+
+function parseRE2020(xmlText) {
+  const doc = new DOMParser().parseFromString(xmlText, 'application/xml');
+  if (doc.getElementsByTagName('parsererror').length) throw new Error("Le fichier n'est pas un XML valide.");
+  const root = doc.documentElement;
+  const datas = kid(root, 'Datas_Comp');
+  const rsenv = kid(root, 'RSEnv') || (root.localName === 'RSEnv' ? root : null);
+  /* RE2020 : sorties dans <RSET>. RT2012 : Entree_Projet / Sortie_Projet directement sous la racine. */
+  const rset = kid(root, 'RSET') || (root.localName === 'RSET' ? root : null) || ((kid(root, 'Sortie_Projet') || kid(root, 'Entree_Projet')) ? root : null);
+  if (!datas && !rset && !rsenv) throw new Error("Ce fichier ne ressemble pas à un RSEE / RSET : aucune des sections Datas_Comp, RSET, Sortie_Projet ou RSEnv n'a été trouvée.");
+  const schema = root.getAttribute('xsi:noNamespaceSchemaLocation') || '';
+  const regime = (!rsenv && (/rt2012/i.test(schema) || doc.getElementsByTagName('O_Shon_RT').length > 0)) ? 'RT2012' : 'RE2020';
+
+  /* --- Données générales --- */
+  const dg = at(datas, 'donnees_generales');
+  const op = at(dg, 'operation');
+  const addr = a => {
+    if (!a) return null;
+    const o = { rue: txt(a, 'name') || kids(a, 'ligne').map(l => l.textContent.trim()).filter(Boolean).join(', '), cp: txt(a, 'postcode') || txt(a, 'code_postal'), ville: txt(a, 'city') || txt(a, 'ville') };
+    return (o.rue || o.cp || o.ville) ? o : null;
+  };
+  const bet0 = kids(dg, 'BET')[0];
+  const logiciel = kids(dg, 'logiciel')[0];
+  const simu = at(rset, 'Entree_Projet', 'Simu');
+  const dept = txt(at(rset, 'Sortie_Projet'), 'Departement') || txt(simu, 'Departement');
+  const meta = {
+    regime,
+    operation: txt(op, 'nom') || txt(op, 'name') || txt(at(rset, 'Entree_Projet'), 'Name') || 'Projet sans nom',
+    description: txt(op, 'description'),
+    adresse: addr(kid(op, 'adresse')),
+    permis: txt(op, 'num_permis'), datePC: txt(op, 'date_depot_PC') || txt(at(rset, 'Entree_Projet', 'Simu'), 'Date_depot_PC'),
+    dateLivraison: txt(op, 'date_livraison'),
+    zone: txt(op, 'zone_climatique') || ZONE_DEPT[dept.padStart(2, '0')] || '', zoneDeduite: !txt(op, 'zone_climatique') && !!ZONE_DEPT[dept.padStart(2, '0')],
+    altitude: num(op, 'altitude') ?? num(simu, 'Altitude'),
+    departement: dept,
+    cadastre: kids(kid(op, 'cadastre'), 'reference_cadastrale').map(c => c.textContent.trim()),
+    moa: txt(at(dg, 'maitre_ouvrage'), 'nom'), moe: txt(at(dg, 'maitre_oeuvre'), 'nom'),
+    bet: kids(dg, 'BET').map(b => txt(b, 'nom')).filter(Boolean).join(', '),
+    logiciel: logiciel ? { nom: txt(logiciel, 'nom'), editeur: txt(logiciel, 'editeur'), version: txt(logiciel, 'version'), date: txt(logiciel, 'date_etude') }
+      : (bet0 && txt(bet0, 'nom_logiciel')) ? { nom: txt(bet0, 'nom_logiciel'), editeur: txt(bet0, 'editeur_logiciel'), version: txt(bet0, 'version_logiciel'), date: txt(bet0, 'date_etude') } : null,
+    versionSchema: datas ? datas.getAttribute('version') : '',
+    dureeRef: null,
+  };
+
+  /* --- Systèmes de génération --- */
+  const generations = kids(at(datas, 'generation_collection'), 'generation').map(g => ({
+    name: txt(g, 'name'),
+    generateurs: kids(kid(g, 'generateur_collection'), 'generateur').map(x => txt(x, 'deno_comm_gene')).filter(Boolean),
+    batiments: kids(kid(g, 'id_bat_commun'), 'id').map(x => x.textContent.trim()),
+  }));
+
+  /* --- Index des sorties par numéro de bâtiment --- */
+  const byIndex = (coll, tag, idxTag = 'Index') => { const m = {}; kids(coll, tag).forEach(e => { m[txt(e, idxTag)] = e; }); return m; };
+  const sp = at(rset, 'Sortie_Projet');
+  const outB = byIndex(kid(sp, 'Sortie_Batiment_B_Collection'), 'Sortie_Batiment_B');
+  const outC = byIndex(kid(sp, 'Sortie_Batiment_C_Collection'), 'Sortie_Batiment_C');
+  const outD = byIndex(kid(sp, 'Sortie_Batiment_D_Collection'), 'Sortie_Batiment_D');
+  const outE = byIndex(kid(sp, 'Sortie_Batiment_E_Collection'), 'Sortie_Batiment_E');
+  const inDC = byIndex(at(datas, 'batiment_collection'), 'batiment');
+  const inRSET = byIndex(at(rset, 'Entree_Projet', 'Batiment_Collection'), 'Batiment');
+  const envIn = byIndex(at(rsenv, 'entree_projet'), 'batiment', 'index');
+  const envOut = byIndex(at(rsenv, 'sortie_projet'), 'batiment', 'index');
+  const ids = Array.from(new Set([...Object.keys(inDC), ...Object.keys(outC), ...Object.keys(outB), ...Object.keys(envOut)])).sort((a, b) => a - b);
+
+  const buildings = ids.map(id => {
+    const dc = inDC[id], b = outB[id], c = outC[id], d = outD[id], e5 = outE[id], ei = envIn[id], eo = envOut[id], ri = inRSET[id];
+    const riZones = kids(kid(ri, 'Zone_Collection'), 'Zone');
+    const zones = kids(kid(dc, 'zone_collection'), 'zone');
+    const envZones = kids(ei, 'zone');
+    const bat = {
+      id, name: txt(b, 'Name') || txt(c, 'Name') || txt(ei, 'nom') || ('Bâtiment ' + id),
+      sref: num(dc, 'O_SREF') ?? num(dc, 'O_Shon_RT') ?? num(c, 'O_SREF') ?? num(c, 'O_Shon_RT') ?? num(ei, 'sref'),
+      surfLabel: regime === 'RT2012' ? 'SHONrt' : 'Sref',
+      shab: num(dc, 'O_SHAB') ?? (zones.reduce((s, z) => s + (num(z, 'O_SHAB') || 0), 0) || null),
+      nOcc: num(dc, 'n_occ'),
+      logements: envZones.reduce((s, z) => s + (num(z, 'nb_logement') || 0), 0) || riZones.reduce((s, z) => s + (num(z, 'NB_logement') || 0), 0) || null,
+      niveaux: num(dc, 'nb_niv_surface'), sousSol: num(dc, 'nb_niv_ssol'),
+      parking: (num(dc, 'nb_place_parking_infra') || 0) + (num(dc, 'nb_place_parking_supra') || 0) + (num(dc, 'nb_place_parking_ext') || 0),
+      ascenseurs: kids(kid(ri, 'Ascenseur_Collection'), 'Ascenseur').length,
+      ventilation: zones.map(z => txt(z, 'denomination_co')).filter(Boolean),
+      periode: num(ei, 'periode_reference'), dureeChantier: num(ei, 'duree_chantier'),
+      generation: generations.filter(g => g.batiments.includes(id)),
+    };
+    /* Exigences de moyens */
+    const em = kid(dc, 'exigences_moyens');
+    if (em) { const arts = Array.from(em.children).map(a => ({ art: a.localName.replace(/^art_?/, ''), v: a.textContent.trim() })); bat.moyens = { arts, ok: arts.filter(a => a.v === '1').length, total: arts.length }; }
+
+    /* Bbio */
+    if (b) bat.bbio = {
+      val: num(b, 'O_Bbio_pts_annuel'), max: num(b, 'O_Bbio_Max'),
+      ch: num(b, 'O_B_Ch_pts_annuel'), fr: num(b, 'O_B_Fr_pts_annuel'), ecl: num(b, 'O_B_Ecl_pts_annuel'),
+      besoins: { ch: num(b, 'O_B_Ch_annuel'), fr: num(b, 'O_B_Fr_annuel'), ecl: num(b, 'O_B_Ecl_annuel') },
+      mois: { ch: monthly(b, 'O_B_Ch_pts_mois'), fr: monthly(b, 'O_B_Fr_pts_mois'), ecl: monthly(b, 'O_B_Ecl_pts_mois') },
+      ratioPsi: num(b, 'Ratio_psi'), q4: num(b, 'Q4Pa_SPAROI') ?? num(b, 'Q4PaSurf'),
+    };
+
+    /* Cep / Cef : RT2012 */
+    if (c && regime === 'RT2012') {
+      const POSTE_RT = { ch: ['ch', 'ch'], fr: ['fr', 'fr'], ecs: ['ecs', 'ecs'], ecl: ['ecl', 'ecl'], auxvent: ['aux_ventilateur', 'auxv'], auxdist: ['aux_distribution', 'auxs'] };
+      const VEC_RT = { elec: ['elec'], gaz: ['gaz'], fioul: ['fioul'], reseau: ['reseau_chaleur'], charbon: ['charbon'], bois: ['bois', 'boisbuch', 'boisbuchpoel', 'boisgran', 'boisgranpoel', 'boisplaq', 'boisplaqpoel'] };
+      const p = {};
+      Object.entries(POSTE_RT).forEach(([k, [cefName, impName]]) => {
+        const byVec = {};
+        Object.entries(VEC_RT).forEach(([v, subs]) => { const x = subs.reduce((s, sub) => s + (num(c, `O_Cef_${sub}_imp_${impName}_annuel`) || 0), 0); if (x) byVec[v] = x; });
+        const cef = num(c, `O_Cef_${cefName}_annuel`) || Object.values(byVec).reduce((a, x) => a + x, 0);
+        if (!Object.keys(byVec).length && cef) byVec.elec = cef;
+        p[k] = { cef, cep: num(c, `O_Cep_${cefName}_annuel`) || 0, byVec };
+      });
+      const immob = num(c, 'O_Cef_us_immob_annuel') || 0;
+      p.deplacement = { cef: immob, cep: 0, horsCep: true, byVec: immob ? { elec: immob } : {} };
+      const vecteurs = {}; Object.values(p).forEach(x => Object.entries(x.byVec).forEach(([v, q]) => { vecteurs[v] = (vecteurs[v] || 0) + q; }));
+      const MOIS_RT = { ch: 'ch', fr: 'fr', ecs: 'ecs', ecl: 'ecl', auxvent: 'aux_ventilateur', auxdist: 'aux_distribution' };
+      bat.cep = {
+        cep: num(c, 'O_Cep_annuel'), cepMax: num(c, 'O_Cep_Max'), cepMaxSpe: num(c, 'O_Cep_Max_spe'), cepnr: null, cepnrMax: null,
+        cef: num(c, 'O_Cef_annuel'), mobilier: num(c, 'O_Cef_us_mob_annuel'), aepenr: num(c, 'O_Aepenr'), rer: num(c, 'O_RER'),
+        vecteurs, postes: p, moisUnit: 'kWhep/m²', moisLabel: 'Consommation d\u2019énergie primaire mois par mois',
+        mois: Object.fromEntries(Object.entries(MOIS_RT).map(([k, n]) => [k, monthly(c, `O_Cep_${n}_mois`) || new Array(12).fill(0)])),
+      };
+    }
+
+    /* Cep / Cef : RE2020 */
+    if (c && regime === 'RE2020') {
+      const vecs = ['elec', 'gaz', 'fioul', 'bois', 'reseau'];
+      const postes = ['ch', 'fr', 'ecs', 'ecl', 'auxvent', 'auxdist', 'deplacement'];
+      const COEF = { elec: 2.3, gaz: 1, fioul: 1, bois: 1, reseau: 1 };
+      const p = {};
+      postes.forEach(k => {
+        const cef = num(c, `O_Cef_imp_${k}_annuel`) || 0;
+        let cepRaw = 0, byVec = {};
+        vecs.forEach(v => { const x = num(c, `O_Cef_${v}_imp_${k}_annuel`); if (x) { byVec[v] = x; cepRaw += x * COEF[v]; } });
+        if (!Object.keys(byVec).length && cef) { byVec.elec = cef; cepRaw = cef * COEF.elec; }
+        p[k] = { cef, cepRaw, byVec };
+      });
+      const cep = num(c, 'O_Cep_annuel');
+      const sRaw = postes.reduce((s, k) => s + p[k].cepRaw, 0);
+      postes.forEach(k => { p[k].cep = sRaw > 0 && cep != null ? p[k].cepRaw * cep / sRaw : p[k].cepRaw; });
+      const moisPoste = k => {
+        if (['ch', 'fr', 'ecs'].includes(k)) return vecs.reduce((acc, v) => addArr(acc, monthly(c, `O_Cef_${v}_imp_${k}_mois`)), new Array(12).fill(0));
+        return monthly(c, `O_Cef_elec_imp_${k}_mois`) || new Array(12).fill(0);
+      };
+      bat.cep = {
+        cep, cepMax: num(c, 'O_Cep_Max'), cepnr: num(c, 'O_Cep_nr_annuel'), cepnrMax: num(c, 'O_Cep_nr_Max'),
+        froidFictif: (num(c, 'generateur_principal_fr') === 0 && (num(c, 'O_Cef_imp_fr_annuel') || 0) > 0),
+        cef: num(c, 'O_Cef_annuel'), mobilier: num(c, 'O_Cef_imp_mobilier_annuel'),
+        pv: num(c, 'O_Eef_Prod_PV_annuel'),
+        vecteurs: Object.fromEntries(vecs.map(v => [v, num(c, `O_Cef_${v}_imp_annuel`) || 0])),
+        postes: p, moisUnit: 'kWhef/m²', moisLabel: 'Consommation finale mois par mois',
+        mois: Object.fromEntries(postes.map(k => [k, moisPoste(k)])),
+      };
+    }
+
+    /* Confort d'été RT2012 : Tic */
+    if (e5) {
+      const groups = [];
+      kids(kid(e5, 'Sortie_Zone_E_Collection'), 'Sortie_Zone_E').forEach(z => kids(kid(z, 'Sortie_Groupe_E_Collection'), 'Sortie_Groupe_E').forEach(g => {
+        const tic = num(g, 'O_Tic'), ref = num(g, 'O_Tic_Ref');
+        if (tic != null && ref != null && (tic > 0 || ref > 0)) groups.push({ zone: txt(z, 'Name'), name: txt(g, 'Name'), shab: num(g, 'O_SHAB'), tic, ref });
+      }));
+      if (groups.length) {
+        const worst = groups.reduce((a, g) => ((g.tic - g.ref) > (a.tic - a.ref) ? g : a), groups[0]);
+        bat.tic = { val: worst.tic, max: worst.ref, groups };
+      }
+    }
+
+    /* Confort d'été RE2020 : DH */
+    if (d) {
+      const groups = [];
+      kids(kid(d, 'Sortie_Zone_D_Collection'), 'Sortie_Zone_D').forEach(z => kids(kid(z, 'Sortie_Groupe_D_Collection'), 'Sortie_Groupe_D').forEach(g => groups.push({
+        zone: txt(z, 'Name'), name: txt(g, 'Name'), sref: num(g, 'O_SREF'),
+        dh: num(g, 'O_NbDegresHeures'), max: num(g, 'O_NbDegresHeures_max'),
+        ppd: num(g, 'O_PPDMoyen'), h: num(g, 'O_Nb_h_inconf'), h1: num(g, 'O_Nb_h_inconf_1'), h2: num(g, 'O_Nb_h_inconf_2'),
+      })));
+      if (groups.length) {
+        const worst = groups.reduce((a, g) => (g.max && a.max ? (g.dh / g.max > a.dh / a.max ? g : a) : a), groups[0]);
+        bat.dh = { val: worst.dh, max: worst.max, h: worst.h, ppd: worst.ppd, groups };
+      }
+    }
+
+    /* Carbone (RSEnv) */
+    if (eo) {
+      const pe = leaves(kid(eo, 'indicateur_perf_env'));
+      const ctb = kid(eo, 'contributeur');
+      const sousContrib = name => kids(kid(ctb, name), 'sous_contributeur').map(s => ({ ref: s.getAttribute('ref'), ic: sumObj(dynSum(s)) })).sort((a, b) => a.ref - b.ref);
+      const lots = kids(kid(ctb, 'composant'), 'lot').map(l => ({
+        ref: l.getAttribute('ref'), ic: num(l, 'ic'), stockC: num(l, 'stock_c'),
+        sous: kids(l, 'sous_lot').map(s => ({ ref: s.getAttribute('ref'), ic: num(s, 'ic') })),
+      })).sort((a, b) => a.ref - b.ref);
+      const phC = dynSum(kid(ctb, 'composant')), phCh = dynSum(kid(ctb, 'chantier'));
+      const phases = {}; new Set([...Object.keys(phC), ...Object.keys(phCh)]).forEach(k => { phases[k] = (phC[k] || 0) + (phCh[k] || 0); });
+      const products = [];
+      envZones.forEach(z => kids(at(z, 'contributeur', 'composant'), 'lot').forEach(l => kids(l, 'sous_lot').forEach(s => kids(s, 'donnees_composant').forEach(p => products.push({
+        lot: l.getAttribute('ref'), sousLot: s.getAttribute('ref'), nom: txt(p, 'nom'), quantite: num(p, 'quantite'),
+        unite: txt(p, 'unite_uf'), dve: num(p, 'dve'), type: txt(p, 'type_donnees'), commentaire: txt(p, 'commentaire'),
+      })))));
+      bat.env = {
+        icc: pe.ic_construction, iccMax: pe.ic_construction_max,
+        iccSeuils: { 2022: pe.ic_construction_max_2022, 2025: pe.ic_construction_max_2025_projete ?? pe.ic_construction_max_2025_anticipe, 2028: pe.ic_construction_max_2028_projete ?? pe.ic_construction_max_2028_anticipe, 2031: pe.ic_construction_max_2031_projete ?? pe.ic_construction_max_2031_anticipe },
+        ice: pe.ic_energie, iceMax: pe.ic_energie_max,
+        iceSeuils: { 2022: pe.ic_energie_max_2022, 2025: pe.ic_energie_max_2025, 2028: pe.ic_energie_max_2028 },
+        eau: pe.ic_eau, composant: pe.ic_composant, chantier: pe.ic_chantier, batiment: pe.ic_batiment, projet: pe.ic_projet, parcelle: pe.ic_parcelle,
+        stockC: pe.stock_c_batiment, udd: pe.udd, ded: pe.ic_ded,
+        lots, phases, products,
+        energieDetail: sousContrib('energie'), eauDetail: sousContrib('eau'), chantierDetail: sousContrib('chantier'),
+      };
+    }
+
+    /* Enveloppe */
+    const env = kid(dc, 'enveloppe');
+    if (env) bat.enveloppe = {
+      opaques: kids(env, 'parois_opaques').map(p => ({ name: txt(p, 'name'), type: p.getAttribute('type_paroi'), U: num(p, 'U_paroi'), S: num(p, 'surface_totale'), R: num(p, 'resistance_thermique_isolant'), ep: num(p, 'epaisseur_isolant'), ext: (kid(p, 'donnant')?.getAttribute('b') === '-1' || txt(p, 'donnant') === '0') })),
+      regime,
+      vitrees: kids(env, 'parois_vitrees').map(p => ({ name: txt(p, 'name'), orient: p.getAttribute('orientation'), Uw: num(p, 'Uw'), Sw: num(p, 'Sw'), Tlw: num(p, 'Tlw'), S: num(p, 'surface_totale'), vitrage: txt(p, 'type_vitrage') })),
+      liaisons: kids(env, 'liaisons').map(p => ({ name: txt(p, 'name'), type: p.getAttribute('type_liaison'), psi: num(p, 'psi_liaison'), L: num(p, 'lineaire') })),
+    };
+    return bat;
+  });
+  if (!buildings.length) throw new Error("Aucun bâtiment n'a été trouvé dans le fichier.");
+  return { meta, generations, buildings, parsedAt: new Date().toISOString() };
+}
+
+/* ========================================================================
+   2. RÈGLES ET LIBELLÉS
+   ======================================================================== */
+const ZONE_DEPT = (() => {
+  const Z = { H1a: '02 14 27 50 59 60 61 62 75 76 77 78 80 91 92 93 94 95', H1b: '08 10 51 52 54 55 57 58 67 68 70 88 89 90',
+    H1c: '01 03 05 15 19 21 23 25 38 39 42 43 63 69 71 73 74 87', H2a: '22 29 35 56', H2b: '16 17 18 28 36 37 41 44 45 49 53 72 79 85 86',
+    H2c: '09 12 24 31 32 33 40 46 47 64 65 81 82', H2d: '04 07 26 48 84', H3: '06 11 13 2A 2B 30 34 66 83' };
+  const m = {}; Object.entries(Z).forEach(([z, l]) => l.split(' ').forEach(d => { m[d] = z; })); return m;
+})();
+const LOTS = {
+  1: ['VRD', 'Voirie et réseaux extérieurs'], 2: ['Fondations et infrastructure', 'Fondations, sous-sol'],
+  3: ['Superstructure, maçonnerie', 'Gros œuvre : planchers, murs, poutres'], 4: ['Couverture, étanchéité, charpente', 'Toiture'],
+  5: ['Cloisonnement, doublage, plafonds, menuiseries int.', 'Cloisons, plafonds, portes intérieures'], 6: ['Façades et menuiseries extérieures', 'Façades, isolation extérieure, fenêtres'],
+  7: ['Revêtements sols, murs, plafonds', 'Sols, peintures, revêtements'], 8: ['CVC', 'Chauffage, ventilation, eau chaude'],
+  9: ['Installations sanitaires', 'Plomberie, sanitaires'], 10: ['Réseaux d’énergie (courant fort)', 'Électricité'],
+  11: ['Réseaux de communication (courant faible)', 'Téléphone, internet, interphonie'], 12: ['Appareils élévateurs', 'Ascenseurs'],
+  13: ['Production locale d’électricité', 'Panneaux photovoltaïques'],
+};
+const lotName = r => (LOTS[r] ? LOTS[r][0] : 'Lot ' + r);
+const lotPlain = r => (LOTS[r] ? LOTS[r][1] : 'Lot ' + r);
+const POSTES = [
+  ['ch', 'Chauffage', '--s1'], ['ecs', 'Eau chaude sanitaire', '--s2'], ['fr', 'Refroidissement', '--s3'],
+  ['ecl', 'Éclairage', '--s4'], ['auxvent', 'Ventilation (auxiliaires)', '--s5'], ['auxdist', 'Pompes et circulateurs', '--s6'], ['deplacement', 'Ascenseurs, parkings', '--s7'],
+];
+const ENERGIE_SC = { 1: 'Chauffage', 2: 'Refroidissement', 3: 'Eau chaude sanitaire', 4: 'Éclairage', 5: 'Auxiliaires de ventilation', 6: 'Auxiliaires de distribution', 7: 'Déplacements (ascenseurs, parkings)' };
+const EAU_SC = { 1: 'Eau potable consommée', 2: 'Eaux usées rejetées' };
+const CHANTIER_SC = { 1: 'Énergie consommée sur le chantier', 2: 'Eau consommée sur le chantier', 3: 'Terres excavées : évacuation, transport, engins', 4: 'Autres postes du chantier' };
+const PHASES = { 'A1-A3': 'Fabrication des produits', 'A4-A5': 'Transport et mise en œuvre', 'B': 'Vie en œuvre (entretien, remplacements)', 'C': 'Fin de vie', 'D': 'Bénéfices hors cycle (recyclage, valorisation)', 'Bexp': 'Exploitation' };
+const TYPES_DONNEES = { 11: 'FDES / PEP individuelle', 12: 'FDES / PEP collective', 7: 'Configurateur', 13: 'Donnée par défaut (DED)', 14: 'Donnée conventionnelle ou forfait' };
+const UNITES = { 2: 'm²', 3: 'kg', 4: 'm³', 5: 'm', 7: 'kWh', 8: 'L', 11: 'm', 13: 'u', 47: 't·km' };
+const PAROIS = { 100: 'Mur', 200: 'Plancher bas', 300: 'Toiture / plancher haut' };
+const PAROIS_RT = { 1: 'Mur', 2: 'Plancher bas', 3: 'Toiture / plancher haut', 4: 'Paroi sur local non chauffé' };
+const VECTEURS = { elec: 'Électricité', gaz: 'Gaz', fioul: 'Fioul', bois: 'Bois', reseau: 'Réseau de chaleur', charbon: 'Charbon', gpl: 'GPL / propane', autre: 'Autre énergie' };
+
+const IND_RE2020 = [
+  { key: 'bbio', theme: 'energie', title: 'Qualité de la conception', tech: 'Bbio', unit: 'points',
+    get: b => [b.bbio?.val, b.bbio?.max],
+    expl: "Les besoins en chauffage, en fraîcheur et en éclairage, avant même de choisir les équipements. Il dépend de l'isolation, de l'orientation et des fenêtres." },
+  { key: 'cepnr', theme: 'energie', title: 'Énergie non renouvelable', tech: 'Cep,nr', unit: 'kWhep/(m².an)',
+    get: b => [b.cep?.cepnr, b.cep?.cepnrMax],
+    expl: "L'énergie d'origine non renouvelable consommée chaque année pour le chauffage, l'eau chaude, la ventilation, l'éclairage et les ascenseurs." },
+  { key: 'cep', theme: 'energie', title: 'Consommation totale d’énergie', tech: 'Cep', unit: 'kWhep/(m².an)',
+    get: b => [b.cep?.cep, b.cep?.cepMax],
+    expl: "Toute l'énergie consommée pour ces mêmes usages, renouvelable comprise, ramenée au mètre carré." },
+  { key: 'dh', theme: 'confort', title: 'Confort en été', tech: 'DH', unit: '°C·h',
+    get: b => [b.dh?.val, b.dh?.max],
+    expl: "La chaleur ressentie au-delà du confort pendant un été caniculaire type, cumulée heure par heure. Sous 350, le confort est jugé bon." },
+  { key: 'ice', theme: 'carbone', title: 'Carbone de l’énergie', tech: 'Ic énergie', unit: 'kg éq. CO₂/m²',
+    get: b => [b.env?.ice, b.env?.iceMax],
+    expl: "Les gaz à effet de serre émis par l'énergie consommée pendant 50 ans d'utilisation." },
+  { key: 'icc', theme: 'carbone', title: 'Carbone de la construction', tech: 'Ic construction', unit: 'kg éq. CO₂/m²',
+    get: b => [b.env?.icc, b.env?.iccMax],
+    expl: "Les émissions liées aux matériaux, aux équipements et au chantier, sur tout leur cycle de vie." },
+];
+const IND_RT2012 = [
+  { key: 'bbio', theme: 'energie', title: 'Qualité de la conception', tech: 'Bbio', unit: 'points',
+    get: b => [b.bbio?.val, b.bbio?.max],
+    expl: "Les besoins en chauffage, en fraîcheur et en éclairage, avant même de choisir les équipements. Il dépend de l'isolation, de l'orientation et des fenêtres." },
+  { key: 'cep', theme: 'energie', title: 'Consommation d\u2019énergie', tech: 'Cep', unit: 'kWhep/(m² SHONrt.an)',
+    get: b => [b.cep?.cep, b.cep?.cepMax],
+    expl: "L'énergie primaire consommée chaque année pour le chauffage, le refroidissement, l'eau chaude, l'éclairage et la ventilation, ramenée au mètre carré." },
+  { key: 'tic', theme: 'confort', title: 'Confort en été', tech: 'Tic', unit: '°C', absVig: 0.5, scaleMin: 20, seuilLbl: 'réf.',
+    get: b => [b.tic?.val, b.tic?.max],
+    expl: "La température intérieure la plus chaude atteinte lors d'une journée chaude type. Elle doit rester sous une température de référence propre au projet." },
+];
+const THEMES_ALL = [
+  ['energie', 'Énergie', 'Ce que le bâtiment demande et consomme.'],
+  ['isolation', 'Isolation', 'Les pertes de chaleur à travers les parois.'],
+  ['confort', 'Confort d\u2019été', 'Comment il se comporte pendant une canicule.'],
+  ['carbone', 'Carbone', 'Son empreinte climatique sur 50 ans.'],
+];
+let INDICATORS = IND_RE2020, THEMES = THEMES_ALL, REGIME = 'RE2020', FAMILY = 'neuf';
+function setRegime(M) {
+  FAMILY = M?.meta?.family || 'neuf';
+  REGIME = M?.meta?.regime || 'RE2020';
+  INDICATORS = FAMILY === 'existant' ? IND_EXISTANT.filter(ind => M.buildings.some(b => ind.get(b)[1] != null))
+    : FAMILY === 'dpe' ? [] : REGIME === 'RT2012' ? IND_RT2012 : IND_RE2020;
+  THEMES = THEMES_ALL.filter(([k]) => INDICATORS.some(i => i.theme === k));
+}
+const VIGILANCE = 0.05; // marge < 5 % du seuil = point de vigilance
+
+function judge(v, max, ind) {
+  if (v == null || max == null || !Number.isFinite(v) || !Number.isFinite(max)) return { k: 'na', label: 'Non disponible', m: null };
+  const m = max !== 0 ? (max - v) / max : null;
+  if (v > max) return { k: 'bad', label: 'Non conforme', m };
+  const low = ind?.absVig != null ? (max - v) < ind.absVig : (m != null && m < VIGILANCE);
+  if (low) return { k: 'warn', label: 'Conforme, marge faible', m };
+  return { k: 'ok', label: 'Conforme', m };
+}
+/* Écart au seuil : en % (ou en °C pour le Tic) */
+function gapTxt(ind, v, max, j, signed = true) {
+  if (j.k === 'na' || v == null || max == null) return '–';
+  if (ind?.absVig != null) { const g = max - v; return (signed ? (g >= 0 ? '−' : '+') : '') + fmt(Math.abs(g)) + ' °C'; }
+  return (signed ? (j.m >= 0 ? '−' : '+') : '') + pct(Math.abs(j.m), Math.abs(j.m) < 0.05 ? 1 : 0);
+}
+function buildingVerdict(b) {
+  const res = INDICATORS.map(ind => { const [v, max] = ind.get(b); return { ind, v, max, j: judge(v, max, ind) }; });
+  const bad = res.filter(r => r.j.k === 'bad'), warn = res.filter(r => r.j.k === 'warn'), na = res.filter(r => r.j.k === 'na');
+  const k = bad.length ? 'bad' : (na.length === res.length ? 'na' : warn.length ? 'warn' : 'ok');
+  return { res, bad, warn, na, k };
+}
+
+/* ========================================================================
+   3. MISE EN FORME
+   ======================================================================== */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const nf = d => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: d, minimumFractionDigits: 0 });
+const fmt = (v, d = 1) => (v == null || !Number.isFinite(v) ? '–' : nf(d).format(v));
+const fmtFixed = (v, d = 1) => (v == null || !Number.isFinite(v) ? '–' : new Intl.NumberFormat('fr-FR', { maximumFractionDigits: d, minimumFractionDigits: d }).format(v));
+const pct = (v, d = 0) => (v == null || !Number.isFinite(v) ? '–' : nf(d).format(v * 100) + ' %');
+const fdate = s => { if (!s) return '–'; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }); };
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const ICON = {
+  ok: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3.5 8.5l3 3 6-7"/></svg>',
+  warn: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 3.5v5.5M8 11.8v.4"/></svg>',
+  bad: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4l8 8M12 4l-8 8"/></svg>',
+  na: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h8"/></svg>',
+};
+const pill = (j, text) => `<span class="pill ${j.k}">${ICON[j.k]}${esc(text ?? j.label)}</span>`;
+
+function gauge(v, max, j, opts = {}) {
+  if (v == null || max == null) return '<p class="note">Valeur ou seuil absent du fichier.</p>';
+  const lo = opts.min ?? 0;
+  const top = lo + (Math.max(v, max) - lo) * 1.18 || 1;
+  const x = n => Math.max(0, Math.min(100, (n - lo) / (top - lo) * 100));
+  let marks = `<div class="tick" style="left:${x(max)}%"></div><div class="tick-lbl ${x(max) > 82 ? 'end' : ''}" style="left:${x(max)}%">${opts.seuilLbl || 'seuil'} ${fmt(max, opts.dec ?? 1)}</div>`;
+  if (opts.ref350 && 350 < top) marks += `<div class="tick soft" style="left:${x(350)}%"></div><div class="tick-lbl start" style="left:${x(350)}%">350</div>`;
+  return `<div class="gauge" role="img" aria-label="Valeur ${fmt(v)} pour un seuil de ${fmt(max)}">
+    <div class="track"></div><div class="fill ${j.k}" style="width:${x(v)}%"></div>${marks}</div>`;
+}
+
+function hbars(rows, opts = {}) {
+  const vals = rows.map(r => r.v || 0);
+  const maxPos = Math.max(0, ...vals), minNeg = Math.min(0, ...vals);
+  const span = (maxPos - minNeg) || 1;
+  const zero = (-minNeg) / span * 100;
+  return `<div class="hbars">${rows.map(r => {
+    const w = Math.abs(r.v || 0) / span * 100;
+    const left = r.v < 0 ? zero - w : zero;
+    return `<div class="hbar"><div class="name">${esc(r.name)}${r.sub ? `<small>${esc(r.sub)}</small>` : ''}</div>
+      <div class="bar">${minNeg < 0 ? `<span class="zero" style="left:${zero}%"></span>` : ''}<i class="${r.v < 0 ? 'neg' : ''}" style="left:${left}%;width:${w}%${r.color ? `;background:var(${r.color})` : ''}"></i></div>
+      <div class="v">${fmt(r.v, opts.d ?? 1)}${r.share != null ? `<small>${pct(r.share)}</small>` : ''}</div></div>`;
+  }).join('')}</div>`;
+}
+
+/* ========================================================================
+   4. RENDU
+   ======================================================================== */
+const state = { model: null, mode: 'essentiel', bi: 0, sample: false, charts: [] };
+try { const m = localStorage.getItem('re2020-mode'); if (['detail', 'essentiel', 'charges'].includes(m)) state.mode = m; } catch (e) {}
+
+function renderDrop() {
+  const d = document.getElementById('drop'), body = document.getElementById('drop-body');
+  document.getElementById('btn-open').hidden = !state.model;
+  if (state.model) {
+    d.classList.add('compact');
+    body.innerHTML = state.sample
+      ? `<span class="sample-flag">Exemple</span> <span class="hint">Fichier d'exemple chargé. Glissez votre propre fichier XML RSEE ici pour le remplacer.</span>`
+      : `<span class="hint">Fichier lu : <b>${esc(state.fileName || '')}</b>. Glissez un autre fichier ici pour le remplacer.</span>`;
+  } else {
+    d.classList.remove('compact');
+    body.innerHTML = `<div style="display:grid;gap:10px;justify-items:center">
+      <h2 style="font-size:1.3rem">Déposez un fichier XML d'étude thermique ou de DPE</h2>
+      <p class="hint">RSEE ou RSET (RE2020, RT2012), dossier RT existant globale, ou DPE au format ADEME.</p>
+      <button class="btn primary" type="button" data-open>Choisir un fichier</button>
+      <p class="privacy">Le fichier reste sur votre ordinateur : il est lu dans le navigateur.</p></div>`;
+  }
+}
+
+function render() {
+  renderDrop();
+  state.charts.forEach(c => c.destroy()); state.charts = [];
+  const app = document.getElementById('app');
+  if (!state.model) { app.innerHTML = ''; return; }
+  const M = state.model, b = M.buildings[state.bi] || M.buildings[0];
+  setRegime(M);
+  state.sensChart = null;
+  const view = state.mode === 'charges' ? costView(M, b)
+    : FAMILY === 'dpe' ? (state.mode === 'essentiel' ? essentielDPE(M, b) : detailDPE(M, b))
+    : state.mode === 'essentiel' ? essentiel(M, b) : FAMILY === 'existant' ? detailEx(M, b) : detail(M, b);
+  app.innerHTML = cartouche(M) + controls(M) + view;
+  if (state.mode === 'detail') { drawCharts(b); renderProducts(); }
+  if (state.mode === 'charges') updateCost();
+}
+
+function cartouche(M) {
+  const m = M.meta, B = M.buildings, F = m.family || 'neuf';
+  const sref = B.reduce((s, b) => s + (b.sref || 0), 0);
+  const logts = B.reduce((s, b) => s + (b.logements || 0), 0);
+  const a = m.adresse;
+  const log = m.logiciel ? [m.logiciel.nom, m.logiciel.version].filter(Boolean).join(' ') : '–';
+  const surfLbl = { SHONrt: 'SHONrt', SHON: 'SHON', SHAB: 'surface habitable' }[B[0]?.surfLabel] || 'surface de référence';
+  const kpis = [];
+  if (F !== 'dpe') kpis.push([fmt(B.length, 0), `bâtiment${B.length > 1 ? 's' : ''}`]);
+  if (logts) kpis.push([fmt(logts, 0), 'logements']);
+  kpis.push([fmt(sref, 0) + ' m²', surfLbl]);
+  if (F !== 'neuf' && B[0]?.annee) kpis.push([String(B[0].annee), 'construction']);
+  const zone = `<span class="val">${esc(m.zone || '–')} <small>${m.zoneDeduite && m.departement ? '· déduite du département ' + esc(m.departement) : m.altitude != null ? '· alt. ' + fmt(m.altitude, 0) + ' m' : ''}</small></span>`;
+  const valid = m.dateEtab ? new Date(new Date(m.dateEtab).setFullYear(new Date(m.dateEtab).getFullYear() + 10)).toISOString().slice(0, 10) : '';
+  const cells = F === 'dpe' ? [
+    ['Propriétaire', `<span class="val">${esc(m.moa || '–')}</span>`], ['Diagnostiqueur', `<span class="val">${esc(m.bet || '–')}</span>`], ['Zone climatique', zone],
+    ['Établi le', `<span class="val">${fdate(m.dateEtab)}</span>`], ['Valable jusqu’au', `<span class="val">${valid ? fdate(valid) : '–'}</span>`], ['Logiciel', `<span class="val">${esc(log)}</span>`],
+  ] : [
+    ['Maître d’ouvrage', `<span class="val">${esc(m.moa || '–')}</span>`], ['Architecte', `<span class="val">${esc(m.moe || '–')}</span>`], ['Bureau d’études', `<span class="val">${esc(m.bet || '–')}</span>`],
+    ['Zone climatique', zone],
+    F === 'existant' ? ['Bureau de contrôle', `<span class="val">${esc(m.controle || '–')}</span>`] : ['Dépôt du permis', `<span class="val">${fdate(m.datePC)}</span>`],
+    ['Étude', `<span class="val">${esc(log)} <small>· ${fdate(m.logiciel?.date)}</small></span>`],
+  ];
+  return `<div class="cartouche">
+    <div class="c-title"><div><span class="lbl">${F === 'dpe' ? 'Diagnostic' : 'Opération'} <span class="regime">${esc(m.regime || 'RE2020')}</span></span><h2>${esc(m.operation)}</h2>${a ? `<p class="addr">${esc([a.rue, [a.cp, a.ville].filter(Boolean).join(' ')].filter(Boolean).join(', '))}</p>` : ''}</div>
+      <div class="kpis">${kpis.map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div></div>
+    ${cells.map(([l, v]) => `<div><span class="lbl">${esc(l)}</span>${v}</div>`).join('')}
+  </div>`;
+}
+
+function controls(M) {
+  const bt = M.buildings.map((b, i) => `<button type="button" data-bi="${i}" aria-pressed="${i === state.bi}">${esc(b.name)}</button>`).join('');
+  return `<div class="controls">
+    <div class="seg mode" role="group" aria-label="Niveau de lecture">
+      <button type="button" data-mode="essentiel" aria-pressed="${state.mode === 'essentiel'}">L'essentiel</button>
+      <button type="button" data-mode="detail" aria-pressed="${state.mode === 'detail'}">Analyse détaillée</button>
+      <button type="button" data-mode="charges" aria-pressed="${state.mode === 'charges'}">Charges énergétiques</button>
+    </div>
+    ${M.buildings.length > 1 ? `<div class="seg" role="group" aria-label="Bâtiment">${bt}</div>` : `<span class="eyebrow">${esc(M.buildings[0].name)}</span>`}
+  </div>`;
+}
+
+/* ---------- L'ESSENTIEL ---------- */
+function essentiel(M, b) {
+  const V = M.buildings.map(buildingVerdict);
+  const nOk = V.filter(v => v.k === 'ok' || v.k === 'warn').length;
+  const all = V.every(v => v.k === 'ok' || v.k === 'warn');
+  const anyBad = V.some(v => v.k === 'bad');
+  const gk = anyBad ? 'bad' : all ? (V.some(v => v.k === 'warn') ? 'warn' : 'ok') : 'na';
+  const n = M.buildings.length;
+  const head = anyBad
+    ? `${V.filter(v => v.k === 'bad').length} bâtiment${V.filter(v => v.k === 'bad').length > 1 ? 's ne respectent' : ' ne respecte'} pas toutes les exigences de la ${REGIME}`
+    : all ? (n > 1 ? `Les ${n} bâtiments respectent les ${INDICATORS.length} exigences de performance de la ${REGIME}` : `Le bâtiment respecte les ${INDICATORS.length} exigences de performance de la ${REGIME}`)
+    : `Résultats incomplets : certains indicateurs sont absents du fichier`;
+  const vig = [];
+  M.buildings.forEach((bb, i) => V[i].warn.forEach(r => vig.push(`${bb.name} : ${r.ind.title.toLowerCase()} (${r.ind.tech}) à ${gapTxt(r.ind, r.v, r.max, r.j, false)} du seuil`)));
+  const bads = [];
+  M.buildings.forEach((bb, i) => V[i].bad.forEach(r => bads.push(`${bb.name} : ${r.ind.title.toLowerCase()} (${r.ind.tech}) dépasse le seuil de ${gapTxt(r.ind, r.v, r.max, r.j, false)}`)));
+  const stampTxt = { ok: 'Conforme', warn: 'Conforme', bad: 'Non<br>conforme', na: 'À<br>vérifier' }[gk];
+  let sub = '';
+  if (bads.length) sub += `<p><b>À corriger :</b> ${bads.map(esc).join(' ; ')}.</p>`;
+  if (vig.length) sub += `<p><b>Point${vig.length > 1 ? 's' : ''} de vigilance (marge inférieure à 5 %${REGIME === 'RT2012' ? ', ou à 0,5 °C pour le Tic' : ''}) :</b> ${vig.map(esc).join(' ; ')}.</p>`;
+  if (!sub) sub = `<p>Tous les indicateurs disposent d'une marge d'au moins 5 % sous leur seuil.</p>`;
+
+  const matrix = n > 1 ? `<div class="matrix"><table><thead><tr><th>Bâtiment</th>${INDICATORS.map(i => `<th>${esc(i.title)}<small>${esc(i.tech)}</small></th>`).join('')}</tr></thead>
+    <tbody>${M.buildings.map((bb, i) => `<tr><td><b>${esc(bb.name)}</b></td>${V[i].res.map(r => `<td>${pill(r.j, gapTxt(r.ind, r.v, r.max, r.j))}</td>`).join('')}</tr>`).join('')}</tbody></table>
+    <p class="note" style="margin-top:6px">Écart de chaque indicateur par rapport à son seuil réglementaire (−12 % = 12 % sous le seuil).</p></div>` : '';
+
+  const vb = V[state.bi];
+  const themes = THEMES.map(([key, label, sub]) => `<div class="theme-row"><header><h3>${label}</h3><p>${sub}</p></header>
+    <div class="cards">${vb.res.filter(r => r.ind.theme === key).map(r => indicatorCard(r, b)).join('')}</div></div>`).join('');
+
+  return `<section class="block" aria-labelledby="h-verdict">
+      <h2 id="h-verdict" class="eyebrow" style="font-family:var(--f-body);font-size:.76rem;font-weight:600">Verdict réglementaire</h2>
+      <div class="verdict ${gk}"><div class="stamp" aria-hidden="true">${ICON[gk]}</div><div><h3>${esc(head)}</h3>${sub}</div></div>
+      ${matrix}
+    </section>
+    <section class="block"><div class="block-head"><div><span class="eyebrow">${esc(b.name)}${b.logements ? ' · ' + fmt(b.logements, 0) + ' logements' : ''} · ${fmt(b.sref, 0)} m² ${esc(b.surfLabel || '')}</span><h2>Les ${INDICATORS.length} indicateurs, en clair</h2></div></div>
+      <p class="lede">Pour chaque indicateur, plus la valeur est basse, mieux c'est. La barre montre le résultat du projet, le trait vertical le maximum autorisé.</p>
+      <div class="themes">${themes}</div></section>
+    ${FAMILY === 'existant' ? beforeAfterBlock(M, b) + factsEx(M, b) : factsBlock(M, b) + stairsBlock(b)}`;
+}
+
+function indicatorCard(r, b) {
+  const { ind, v, max, j } = r;
+  let say = '';
+  if (ind.absVig != null && j.k !== 'na') {
+    if (j.k === 'ok') say = `${fmt(max - v)} °C sous la température de référence.`;
+    else if (j.k === 'warn') say = `Sous la référence, mais de peu : ${fmt(max - v)} °C d\u2019écart.`;
+    else say = `Au-dessus de la température de référence de ${fmt(v - max)} °C.`;
+  }
+  else if (j.k === 'ok') say = `Sous le seuil, avec ${pct(j.m)} de marge.`;
+  else if (j.k === 'warn') say = `Sous le seuil, mais de peu : ${pct(j.m, 1)} de marge.`;
+  else if (j.k === 'bad') say = `Au-dessus du seuil de ${pct(-j.m, 1)}.`;
+  if (ind.key === 'dh' && v != null) say += v <= 350 ? ' Confort d’été jugé bon.' : ' Au-dessus de 350 : de l’inconfort reste possible lors des fortes chaleurs.';
+  return `<article class="card"><div class="top"><div><h4>${esc(ind.title)}</h4><span class="tech">${esc(ind.tech)} · ${esc(ind.unit)}</span></div>${pill(j)}</div>
+    <p class="expl">${esc(ind.expl)}</p>
+    <div class="figure"><b>${fmt(v, ind.dec ?? 1)}</b><span>${esc(ind.unit)} · ${ind.seuilLbl ? 'référence' : 'seuil'} ${fmt(max, ind.dec ?? 1)}</span></div>
+    ${gauge(v, max, j, { ref350: ind.key === 'dh', min: ind.scaleMin, seuilLbl: ind.seuilLbl, dec: ind.dec })}
+    ${(() => { const i0 = ind.initial ? ind.initial(b) : null; return i0 != null && v != null ? `<p class="before-line">Avant travaux : <b>${fmt(i0, ind.dec ?? 1)}</b> → ${fmt(v, ind.dec ?? 1)} <span class="ba-d ${v <= i0 ? 'down' : 'up'}">${v <= i0 ? '−' : '+'}${pct(Math.abs(v - i0) / i0)}</span></p>` : ''; })()}
+    <p class="say">${esc(say)}</p></article>`;
+}
+
+function factsBlock(M, b) {
+  const F = [];
+  const gens = b.generation || [];
+  if (b.cep) {
+    const vecs = Object.entries(b.cep.vecteurs).filter(([, x]) => x > 0).sort((a, c) => c[1] - a[1]).map(([k]) => VECTEURS[k]);
+    const g = gens.length ? gens.map(gen => `${gen.name}${gen.generateurs.length ? ' (' + gen.generateurs.join(', ') + ')' : ''}`).join(' ; ') : null;
+    F.push(['Chauffage et eau chaude', `${g ? `<b>${esc(g)}</b>, ` : ''}alimenté${vecs.length > 1 ? 's' : ''} par : <b>${esc(vecs.join(', ') || '–')}</b>.${b.ventilation.length ? ` Ventilation : ${esc(b.ventilation.join(', '))}.` : ''}`]);
+    if (b.cep.cef != null && b.sref && b.logements) {
+      const perLog = b.cep.cef * b.sref / b.logements;
+      F.push(['Consommation réglementaire', `Environ <b>${fmt(Math.round(perLog / 10) * 10, 0)} kWh par logement et par an</b> pour le chauffage, l'eau chaude, la ventilation et l'éclairage${REGIME === 'RE2020' ? ', parties communes comprises' : ''} (hors électroménager). C'est un calcul conventionnel, pas une prévision de facture.`]);
+    }
+    const top = POSTES.map(([k, l]) => [l, b.cep.postes[k]?.cep || 0]).sort((a, c) => c[1] - a[1]);
+    const tot = top.reduce((s, x) => s + x[1], 0);
+    if (tot > 0) F.push(['Premier poste de consommation', `<b>${esc(top[0][0])}</b> : ${pct(top[0][1] / tot)} de l'énergie consommée${top[1] && top[1][1] > 0 ? `, devant ${esc(top[1][0].toLowerCase())} (${pct(top[1][1] / tot)})` : ''}.`]);
+  }
+  if (b.tic) F.push(['Journée chaude', `Lors d'une journée chaude type, la température intérieure maximale atteindrait <b>${fmt(b.tic.val)} °C</b>, pour une référence de ${fmt(b.tic.max)} °C.`]);
+  if (b.dh) F.push(['Été caniculaire', `Sur l'été type utilisé par le calcul, environ <b>${fmt(b.dh.h, 0)} heures</b> sont jugées inconfortables, sans climatisation.`]);
+  if (b.env?.icc != null && b.sref) {
+    F.push(['Empreinte de la construction', `Matériaux, équipements et chantier représentent <b>${fmt(b.env.icc * b.sref / 1000, 0)} tonnes d'équivalent CO₂</b> sur 50 ans, soit ${fmt(b.env.icc, 0)} kg par m².`]);
+    const lots = (b.env.lots || []).filter(l => l.ic > 0).sort((a, c) => c.ic - a.ic);
+    if (lots.length && b.env.composant) F.push(['Ce qui pèse le plus', `<b>${esc(lotPlain(lots[0].ref))}</b> : ${pct(lots[0].ic / b.env.composant)} du carbone des matériaux et équipements, puis ${esc(lotPlain(lots[1]?.ref).toLowerCase())} (${pct((lots[1]?.ic || 0) / b.env.composant)}).`]);
+  }
+  const RC = b.cep ? costOf(b, COST_REF) : null;
+  if (RC && RC.perLog) F.push(['Charges énergétiques', `Environ <b>${eur(Math.round(RC.perLog / 10) * 10)} par logement et par an</b> (≈ ${eur(Math.round(RC.perLog / 12))} par mois) aux prix actuels, électroménager compris. <button type="button" class="linkbtn" data-mode="charges">Faire varier les prix</button>`]);
+  if (!F.length) return '';
+  return `<section class="block"><h2>Ce qu'il faut retenir</h2><div class="facts">${F.map(([t, p]) => `<div class="fact"><div class="eyebrow">${esc(t)}</div><p>${p}</p></div>`).join('')}</div></section>`;
+}
+
+function stairsBlock(b) {
+  const S = b.env?.iccSeuils, v = b.env?.icc;
+  if (!S || v == null) return '';
+  const years = [['2022', '2022–2024'], ['2025', '2025–2027'], ['2028', '2028–2030'], ['2031', '2031 et après']].filter(([y]) => S[y] != null);
+  if (!years.length) return '';
+  const top = Math.max(v, ...years.map(([y]) => S[y])) * 1.08;
+  const y = n => n / top * 100;
+  const pc = (b.env.iccMax != null) ? years.find(([yy]) => Math.abs(S[yy] - b.env.iccMax) < 1e-6 && yy !== '2022')?.[0] || years.find(([yy]) => Math.abs(S[yy] - b.env.iccMax) < 1e-6)?.[0] : null;
+  const next = years.filter(([yy]) => +yy > +(pc || 0));
+  const passNext = next.filter(([yy]) => v <= S[yy]);
+  let msg;
+  if (!next.length) msg = '';
+  else if (passNext.length === next.length) msg = `Le projet respecte déjà les seuils prévus jusqu'en ${next[next.length - 1][0]}.`;
+  else if (passNext.length) msg = `Le projet respecte déjà le seuil ${passNext.map(x => x[0]).join(', ')}, mais pas encore celui de ${next.filter(([yy]) => v > S[yy]).map(x => x[0]).join(', ')}.`;
+  else msg = `Le projet devra réduire son empreinte de ${pct((v - S[next[0][0]]) / v, 1)} pour respecter le seuil ${next[0][0]}.`;
+  return `<section class="block"><div><span class="eyebrow">${esc(b.name)} · Ic construction</span><h2>La trajectoire carbone de la RE2020</h2></div>
+    <p class="lede">Le maximum autorisé pour le carbone de la construction baisse par paliers. Chaque marche est le seuil d'une période ; la ligne pointillée est le projet. ${esc(msg)}</p>
+    <div class="stairs-wrap"><div class="stairs" role="img" aria-label="Seuils carbone par période et valeur du projet">
+      ${years.map(([yy]) => `<div class="step ${yy === pc ? 'current' : ''}" style="height:${y(S[yy])}%"></div>`).join('')}
+      <div class="proj" style="bottom:${y(v)}%"><span>Projet ${fmt(v, 0)}</span></div></div>
+      <div class="stairs-x">${years.map(([yy, lab]) => { const j = judge(v, S[yy]); return `<div><b>${lab}</b><span class="mono note">seuil ${fmt(S[yy], 0)}</span>${pill(j, j.k === 'bad' ? 'Dépassé de ' + pct(-j.m, 1) : j.k === 'warn' ? 'Respecté de justesse' : 'Respecté')}${yy === pc ? '<span class="note">seuil applicable au permis</span>' : ''}</div>`; }).join('')}</div>
+      <p class="note">kg éq. CO₂ par m² de surface de référence, sur 50 ans. Seuils lus dans le fichier (modulés selon le projet).</p></div></section>`;
+}
+
+/* ---------- ANALYSE DÉTAILLÉE ---------- */
+function detail(M, b) {
+  const parts = [
+    ['d-ind', 'Indicateurs', detIndicators(M)],
+    ['d-energie', 'Énergie', detEnergie(b)],
+    ['d-confort', 'Confort d’été', detConfort(b)],
+    ['d-carbone', 'Carbone', detCarbone(b)],
+    ['d-produits', 'Produits saisis', detProduits(b)],
+    ['d-enveloppe', 'Enveloppe', detEnveloppe(b)],
+    ['d-projet', 'Projet', detProjet(M, b)],
+  ].filter(p => p[2]);
+  return `<section class="block"><nav class="subnav" aria-label="Sections">${parts.map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</nav></section>
+    ${parts.map(([id, l, html]) => `<section class="block" id="${id}">${html}</section>`).join('')}`;
+}
+
+function detIndicators(M) {
+  const rows = [];
+  M.buildings.forEach(b => {
+    const v = buildingVerdict(b);
+    v.res.forEach((r, i) => rows.push(`<tr>${i === 0 ? `<td rowspan="${v.res.length}"><b>${esc(b.name)}</b><br><span class="note">${fmt(b.sref, 1)} m² ${esc(b.surfLabel || 'Sref')}</span></td>` : ''}
+      <td>${esc(r.ind.tech)}</td><td class="note">${esc(r.ind.unit)}</td>${FAMILY === 'existant' ? `<td class="r">${r.ind.initial ? fmtFixed(r.ind.initial(b), r.ind.dec ?? 1) : '–'}</td>` : ''}<td class="r">${fmtFixed(r.v, r.ind.dec ?? 1)}</td><td class="r">${fmtFixed(r.max, r.ind.dec ?? 1)}</td>
+      <td class="r">${r.v != null && r.max != null ? fmtFixed(r.max - r.v, r.ind.dec ?? 1) : '–'}</td><td class="r">${r.ind.absVig != null ? '–' : pct(r.j.m, 1)}</td><td>${pill(r.j)}</td></tr>`));
+  });
+  return `<div class="block-head"><h2>Tableau des indicateurs</h2><button class="btn" type="button" data-copy-csv>Copier en CSV</button></div>
+    <div class="panel"><div class="tbl"><table><thead><tr><th>Bâtiment</th><th>Indicateur</th><th>Unité</th>${FAMILY === 'existant' ? '<th class="r">Initial</th>' : ''}<th class="r">Projet</th><th class="r">Seuil</th><th class="r">Marge</th><th class="r">Marge %</th><th>Statut</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>
+    <p class="note">Statut « marge faible » quand l'indicateur est à moins de ${pct(VIGILANCE)} de son seuil${REGIME === 'RT2012' || FAMILY === 'existant' ? ' (0,5 °C pour le Tic). Tic : groupe le plus défavorable, comparé à sa Tic de référence' : '. DH : groupe le plus défavorable du bâtiment'}.</p></div>`;
+}
+function indicatorsCSV(M) {
+  const L = [['Bâtiment', 'Surface (m²)', 'Indicateur', 'Unité', 'Projet', 'Seuil', 'Marge', 'Marge %', 'Statut'].join(';')];
+  M.buildings.forEach(b => buildingVerdict(b).res.forEach(r => L.push([b.name, fmtFixed(b.sref), r.ind.tech, r.ind.unit, fmtFixed(r.v), fmtFixed(r.max), r.v != null && r.max != null ? fmtFixed(r.max - r.v) : '', r.j.m != null ? fmtFixed(r.j.m * 100) : '', r.j.label].join(';'))));
+  return L.join('\n');
+}
+
+function detEnergie(b) {
+  if (!b.cep && !b.bbio) return '';
+  let html = `<h2>Énergie</h2><div class="grid2">`;
+  if (b.bbio) {
+    const B = b.bbio, tot = (B.ch || 0) + (B.fr || 0) + (B.ecl || 0);
+    const seg = [['Chauffage', B.ch, '--s1'], ['Refroidissement', B.fr, '--s3'], ['Éclairage', B.ecl, '--s4']];
+    html += `<div class="panel"><h3>Bbio : ${fmt(B.val)} / ${fmt(B.max)} <small>points</small></h3>
+      <div class="stack" role="img" aria-label="Répartition du Bbio">${seg.map(([l, v, c]) => `<i style="width:${(v || 0) / tot * 100}%;background:var(${c})" title="${l} : ${fmt(v)} pts"></i>`).join('')}</div>
+      <div class="legend">${seg.map(([l, v, c]) => `<span><i style="background:var(${c})"></i>${l} <b class="num">${fmt(v)}</b> pts (${pct(v / tot)})</span>`).join('')}</div>
+      <div class="chart-box"><canvas id="ch-bbio" aria-label="Bbio mensuel"></canvas></div>
+      <div class="chips"><span class="chip">Besoins chauffage <b>${fmt(B.besoins.ch)}</b> kWh/m²</span><span class="chip">Besoins froid <b>${fmt(B.besoins.fr)}</b> kWh/m²</span><span class="chip">Éclairage <b>${fmt(B.besoins.ecl)}</b> kWh/m²</span>${B.ratioPsi != null ? `<span class="chip">Ratio ψ <b>${fmt(B.ratioPsi, 2)}</b> W/(m².K)</span>` : ''}${B.q4 != null ? `<span class="chip">Perméabilité Q4Pa-surf <b>${fmt(B.q4, 2)}</b> m³/(h.m²)</span>` : ''}</div></div>`;
+  }
+  if (b.cep) {
+    const C = b.cep;
+    const rows = POSTES.map(([k, l, c]) => ({ k, name: l, v: C.postes[k]?.cep || 0, cef: C.postes[k]?.cef || 0, color: c })).filter(r => r.v > 0 || r.cef > 0);
+    const tot = rows.reduce((s, r) => s + r.v, 0);
+    rows.forEach(r => { r.share = tot ? r.v / tot : null; });
+    html += `<div class="panel"><h3>Cep par usage <small>kWhep/(m².an)</small></h3>
+      ${hbars(rows.filter(r => r.v > 0).sort((a, c) => c.v - a.v))}
+      <div class="tbl"><table><thead><tr><th>Usage</th><th class="r">Cef</th><th class="r">Cep</th><th>Énergie</th></tr></thead><tbody>
+      ${rows.map(r => `<tr><td>${esc(r.name)}${r.k === 'fr' && C.froidFictif ? '<br><span class="note">refroidissement fictif : pas de climatisation, pénalité liée au DH supérieur à 350</span>' : ''}</td><td class="r">${fmtFixed(r.cef)}</td><td class="r">${C.postes[r.k].horsCep ? '<span class="note">hors Cep</span>' : fmtFixed(r.v)}</td><td class="note">${esc(Object.keys(C.postes[r.k].byVec).map(v => VECTEURS[v]).join(', '))}</td></tr>`).join('')}
+      <tr><td><b>Total</b></td><td class="r"><b>${fmtFixed(C.cef)}</b></td><td class="r"><b>${fmtFixed(C.cep)}</b></td><td></td></tr>
+      ${C.mobilier ? `<tr class="sub"><td>Électroménager et autres usages (hors Cep)</td><td class="r">${fmtFixed(C.mobilier)}</td><td class="r">–</td><td></td></tr>` : ''}
+      </tbody></table></div>
+      ${REGIME === 'RT2012' ? `<div class="chips">${C.cepMaxSpe != null ? `<span class="chip">Cep max spécifique (O_Cep_Max_spe) <b>${fmt(C.cepMaxSpe)}</b></span>` : ''}${C.aepenr ? `<span class="chip">Énergie renouvelable produite (Aepenr) <b>${fmt(C.aepenr)}</b> kWhep/(m².an)</span>` : ''}${C.rer ? `<span class="chip">Ratio d'énergie renouvelable (RER) <b>${fmt(C.rer)}</b></span>` : ''}</div>` : ''}
+      <p class="note">${REGIME === 'RT2012' ? 'Cef : énergie finale (kWhef). Cep par usage lu directement dans le fichier. En RT2012, les ascenseurs et parkings ne comptent pas dans le Cep.' : 'Cef : énergie finale (kWhef). Cep par usage reconstitué depuis la Cef (coefficient 2,3 pour l\'électricité, 1 pour les autres énergies) puis recalé sur le Cep total du fichier.'}</p></div>`;
+    html += `<div class="panel" style="grid-column:1/-1"><h3>${esc(C.moisLabel || 'Consommation finale mois par mois')} <small>${esc(C.moisUnit || 'kWhef/m²')}</small></h3><div class="chart-box"><canvas id="ch-cef" aria-label="Cef mensuelle par usage"></canvas></div>${(() => { const miss = POSTES.filter(([k]) => (C.postes[k]?.cef || 0) > 0 && !(C.mois[k] || []).some(v => v > 0)).map(([, l]) => l.toLowerCase()); return miss.length ? `<p class="note">Absents du graphique, faute de détail mensuel dans le fichier : ${esc(miss.join(', '))}.</p>` : ''; })()}</div>`;
+  }
+  return html + `</div>`;
+}
+
+function detConfort(b) {
+  if (b.tic) return `<h2>Confort d'été</h2><div class="panel"><div class="tbl"><table><thead><tr><th>Zone</th><th>Groupe</th><th class="r">SHAB</th><th class="r">Tic</th><th class="r">Tic réf.</th><th class="r">Écart</th><th>Statut</th></tr></thead>
+    <tbody>${b.tic.groups.map(g => { const j = judge(g.tic, g.ref, IND_RT2012[2]); return `<tr><td>${esc(g.zone)}</td><td>${esc(g.name)}</td><td class="r">${fmtFixed(g.shab)}</td><td class="r">${fmtFixed(g.tic)} °C</td><td class="r">${fmtFixed(g.ref)} °C</td><td class="r">${(g.tic - g.ref >= 0 ? '+' : '−') + fmtFixed(Math.abs(g.tic - g.ref))} °C</td><td>${pill(j)}</td></tr>`; }).join('')}</tbody></table></div>
+    <p class="note">Tic : température intérieure conventionnelle maximale atteinte lors d'une séquence chaude. Elle doit rester inférieure ou égale à la Tic de référence de chaque groupe (zones non climatisées de catégorie CE1).</p></div>`;
+  if (!b.dh) return '';
+  return `<h2>Confort d'été</h2><div class="panel"><div class="tbl"><table><thead><tr><th>Zone</th><th>Groupe</th><th class="r">Sref</th><th class="r">DH</th><th class="r">DH max</th><th class="r">Heures d'inconfort</th><th class="r">PPD moyen</th><th>Statut</th></tr></thead>
+    <tbody>${b.dh.groups.map(g => `<tr><td>${esc(g.zone)}</td><td>${esc(g.name)}</td><td class="r">${fmtFixed(g.sref)}</td><td class="r">${fmtFixed(g.dh)}</td><td class="r">${fmtFixed(g.max, 0)}</td><td class="r">${fmt(g.h, 0)}</td><td class="r">${fmtFixed(g.ppd)} %</td><td>${pill(judge(g.dh, g.max))}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">DH en degrés-heures d'inconfort sur l'été conventionnel. Entre 350 et le seuil, le bâtiment est conforme mais une consommation de refroidissement fictive est ajoutée au Cep.</p></div>`;
+}
+
+function detCarbone(b) {
+  const E = b.env; if (!E) return '';
+  const contrib = [['Matériaux et équipements', E.composant, '--s1'], ['Chantier', E.chantier, '--s2'], ['Énergie', E.ice, '--s3'], ['Eau', E.eau, '--s4']];
+  const tot = contrib.reduce((s, c) => s + (c[1] || 0), 0);
+  const lots = E.lots.slice().sort((a, c) => (c.ic || 0) - (a.ic || 0));
+  const phaseRows = Object.entries(E.phases).filter(([k, v]) => Math.abs(v) > 1e-9 || k !== 'Bexp').filter(([k, v]) => !(k === 'Bexp' && !v)).map(([k, v]) => ({ name: PHASES[k] || k, sub: k, v }));
+  const sc = (arr, map) => hbars(arr.map(x => ({ name: map[x.ref] || ('Poste ' + x.ref), v: x.ic })).sort((a, c) => c.v - a.v));
+  return `<h2>Carbone</h2><div class="grid2">
+    <div class="panel" style="grid-column:1/-1"><h3>Ic bâtiment : ${fmt(E.batiment)} <small>kg éq. CO₂/m² · 50 ans</small></h3>
+      <div class="stack" role="img" aria-label="Répartition de l'Ic bâtiment">${contrib.map(([l, v, c]) => `<i style="width:${(v || 0) / tot * 100}%;background:var(${c})" title="${l} : ${fmt(v)}"></i>`).join('')}</div>
+      <div class="legend">${contrib.map(([l, v, c]) => `<span><i style="background:var(${c})"></i>${l} <b class="num">${fmt(v)}</b> (${pct((v || 0) / tot)})</span>`).join('')}</div>
+      <div class="chips"><span class="chip">Ic construction = matériaux + chantier = <b>${fmt(E.icc)}</b></span><span class="chip">Ic projet (avec parcelle) <b>${fmt(E.projet)}</b></span><span class="chip">Stock carbone biogénique <b>${fmt(E.stockC, 2)}</b> kg C/m²</span><span class="chip">Impact couvert par des données par défaut <b>${fmt(E.ded)}</b> kg éq. CO₂/m²</span><span class="chip">UDD <b>${fmt(E.udd, 3)}</b></span></div></div>
+    <div class="panel"><h3>Matériaux et équipements par lot <small>kg éq. CO₂/m²</small></h3>
+      ${hbars(lots.map(l => ({ name: `${l.ref}. ${lotName(l.ref)}`, v: l.ic, share: E.composant ? l.ic / E.composant : null })))}</div>
+    <div class="panel"><h3>Ic construction par étape du cycle de vie <small>kg éq. CO₂/m²</small></h3>
+      ${hbars(phaseRows)}
+      <p class="note">Somme des contributeurs matériaux et chantier, en ACV dynamique. Les valeurs négatives (D) sont des bénéfices au-delà de la durée de vie.</p>
+      <h3 style="margin-top:8px">Ic énergie par usage</h3>${sc(E.energieDetail, ENERGIE_SC)}
+      <h3 style="margin-top:8px">Eau et chantier</h3>${sc([...E.eauDetail.map(x => ({ ...x, ref: 'e' + x.ref })), ...E.chantierDetail.map(x => ({ ...x, ref: 'c' + x.ref }))], { e1: EAU_SC[1], e2: EAU_SC[2], c1: CHANTIER_SC[1], c2: CHANTIER_SC[2], c3: CHANTIER_SC[3], c4: CHANTIER_SC[4] })}</div>
+    <div class="panel" style="grid-column:1/-1"><h3>Détail par lot et sous-lot</h3><div class="tbl"><table><thead><tr><th>Lot</th><th class="r">Ic (kg éq. CO₂/m²)</th><th class="r">Part</th><th class="r">Stock C (kg C/m²)</th><th class="r">Produits</th></tr></thead><tbody>
+      ${E.lots.map(l => `<tr><td><b>${esc(l.ref)}. ${esc(lotName(l.ref))}</b></td><td class="r"><b>${fmtFixed(l.ic, 2)}</b></td><td class="r">${pct(l.ic / E.composant, 1)}</td><td class="r">${fmtFixed(l.stockC, 2)}</td><td class="r">${E.products.filter(p => p.lot === l.ref).length}</td></tr>
+        ${l.sous.map(s => `<tr class="sub"><td>Sous-lot ${esc(s.ref)}</td><td class="r">${fmtFixed(s.ic, 2)}</td><td class="r">${pct(s.ic / E.composant, 1)}</td><td></td><td class="r">${E.products.filter(p => p.sousLot === s.ref).length}</td></tr>`).join('')}`).join('')}
+      <tr><td><b>Total matériaux et équipements</b></td><td class="r"><b>${fmtFixed(E.composant, 2)}</b></td><td class="r">100 %</td><td></td><td class="r">${E.products.length}</td></tr></tbody></table></div></div>
+  </div>`;
+}
+
+function detProduits(b) {
+  const P = b.env?.products; if (!P || !P.length) return '';
+  const counts = {}; P.forEach(p => { counts[p.type] = (counts[p.type] || 0) + 1; });
+  const lots = Array.from(new Set(P.map(p => p.lot))).sort((a, c) => a - c);
+  return `<h2>Produits et données environnementales saisis</h2><div class="panel">
+    <div class="chips">${Object.entries(counts).sort((a, c) => c[1] - a[1]).map(([t, n]) => `<span class="chip">${esc(TYPES_DONNEES[t] || 'Type ' + t)} <b>${n}</b></span>`).join('')}</div>
+    <div class="filters"><input id="f-q" type="search" placeholder="Rechercher un produit ou un commentaire" aria-label="Rechercher un produit">
+      <select id="f-lot" aria-label="Filtrer par lot"><option value="">Tous les lots</option>${lots.map(l => `<option value="${esc(l)}">${esc(l)}. ${esc(lotName(l))}</option>`).join('')}</select>
+      <select id="f-type" aria-label="Filtrer par type de donnée"><option value="">Tous les types de données</option>${Object.keys(counts).map(t => `<option value="${esc(t)}">${esc(TYPES_DONNEES[t] || 'Type ' + t)}</option>`).join('')}</select></div>
+    <div class="tbl" style="max-height:520px;overflow:auto"><table><thead><tr><th>Sous-lot</th><th>Produit</th><th class="r">Quantité</th><th>Unité</th><th class="r">DVE</th><th>Donnée</th></tr></thead><tbody id="prod-body"></tbody></table></div>
+    <p class="note" id="prod-count"></p>
+    <p class="note">Le fichier ne détaille pas l'impact carbone produit par produit : seuls les totaux par lot et sous-lot sont fournis. DVE : durée de vie estimée (années).</p></div>`;
+}
+function renderProducts() {
+  const tb = document.getElementById('prod-body'); if (!tb) return;
+  const b = state.model.buildings[state.bi]; const P = b.env.products;
+  const q = (document.getElementById('f-q').value || '').toLowerCase(), lot = document.getElementById('f-lot').value, ty = document.getElementById('f-type').value;
+  const F = P.filter(p => (!lot || p.lot === lot) && (!ty || p.type === ty) && (!q || (p.nom + ' ' + p.commentaire).toLowerCase().includes(q)));
+  tb.innerHTML = F.map(p => `<tr><td class="mono">${esc(p.sousLot)}</td><td>${esc(p.nom)}${p.commentaire ? `<br><span class="note">${esc(p.commentaire)}</span>` : ''}</td><td class="r">${fmt(p.quantite, 2)}</td><td>${esc(UNITES[p.unite] || 'UF ' + p.unite)}</td><td class="r">${fmt(p.dve, 0)}</td><td class="note">${esc(TYPES_DONNEES[p.type] || 'Type ' + p.type)}</td></tr>`).join('');
+  document.getElementById('prod-count').textContent = `${F.length} produit${F.length > 1 ? 's' : ''} affiché${F.length > 1 ? 's' : ''} sur ${P.length}.`;
+}
+
+function detEnveloppe(b) {
+  const E = b.enveloppe; if (!E) return '';
+  const sumS = a => a.reduce((s, x) => s + (x.S || 0), 0);
+  const avgU = (a, k) => { const S = sumS(a); return S ? a.reduce((s, x) => s + (x[k] || 0) * (x.S || 0), 0) / S : null; };
+  const opExt = E.opaques.filter(o => o.ext);
+  const orients = {}; E.vitrees.forEach(v => { orients[v.orient || '?'] = (orients[v.orient || '?'] || 0) + (v.S || 0); });
+  const Lpsi = E.liaisons.reduce((s, l) => s + (l.psi || 0) * (l.L || 0), 0);
+  return `<h2>Enveloppe</h2>
+    <div class="chips"><span class="chip">Parois opaques sur extérieur <b>${fmt(sumS(opExt), 0)}</b> m², U moyen <b>${fmt(avgU(opExt, 'U'), 2)}</b> W/(m².K)</span>
+      <span class="chip">Baies <b>${fmt(sumS(E.vitrees), 0)}</b> m², Uw moyen <b>${fmt(avgU(E.vitrees, 'Uw'), 2)}</b></span>
+      <span class="chip">Baies par orientation : ${Object.entries(orients).map(([o, s]) => `${esc(o)} <b>${fmt(s, 0)}</b> m²`).join(' · ')}</span>
+      <span class="chip">Ponts thermiques Σψ·L <b>${fmt(Lpsi, 0)}</b> W/K</span></div>
+    <div class="grid2">
+    <div class="panel"><h3>Parois opaques <small>${E.opaques.length} entrées</small></h3><div class="tbl" style="max-height:420px;overflow:auto"><table><thead><tr><th>Paroi</th><th>Type</th><th class="r">U</th><th class="r">R isolant</th><th class="r">Surface</th></tr></thead><tbody>
+      ${E.opaques.slice().sort((a, c) => (c.S || 0) - (a.S || 0)).map(o => `<tr><td>${esc(o.name)}${o.ext ? '' : ' <span class="note">(sur local non chauffé)</span>'}</td><td class="note">${esc((E.regime === 'RT2012' ? PAROIS_RT : PAROIS)[o.type] || o.type)}</td><td class="r">${fmtFixed(o.U, 2)}</td><td class="r">${o.R != null ? fmtFixed(o.R, 2) : '–'}</td><td class="r">${fmtFixed(o.S)}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="panel"><h3>Baies vitrées <small>${E.vitrees.length} entrées</small></h3><div class="tbl" style="max-height:420px;overflow:auto"><table><thead><tr><th>Baie</th><th>Or.</th><th class="r">Uw</th><th class="r">Sw</th><th class="r">Surface</th></tr></thead><tbody>
+      ${E.vitrees.slice().sort((a, c) => (c.S || 0) - (a.S || 0)).map(v => `<tr><td>${esc(v.name)}<br><span class="note">${esc(v.vitrage)}</span></td><td>${esc(v.orient)}</td><td class="r">${fmtFixed(v.Uw, 2)}</td><td class="r">${fmtFixed(v.Sw, 2)}</td><td class="r">${fmtFixed(v.S)}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="panel" style="grid-column:1/-1"><h3>Ponts thermiques <small>${E.liaisons.length} liaisons</small></h3><div class="tbl" style="max-height:420px;overflow:auto"><table><thead><tr><th>Liaison</th><th>Type</th><th class="r">ψ (W/(m.K))</th><th class="r">Linéaire (m)</th><th class="r">ψ·L (W/K)</th></tr></thead><tbody>
+      ${E.liaisons.slice().sort((a, c) => (c.psi || 0) * (c.L || 0) - (a.psi || 0) * (a.L || 0)).map(l => `<tr><td>${esc(l.name)}</td><td class="mono note">${esc(l.type)}</td><td class="r">${fmtFixed(l.psi, 2)}</td><td class="r">${fmtFixed(l.L)}</td><td class="r">${fmtFixed((l.psi || 0) * (l.L || 0))}</td></tr>`).join('')}</tbody></table></div></div>
+  </div>`;
+}
+
+function detProjet(M, b) {
+  const m = M.meta;
+  const rows = [
+    ['Opération', m.operation], ['Description', m.description], ['Adresse', m.adresse ? `${m.adresse.rue}, ${m.adresse.cp} ${m.adresse.ville}` : ''],
+    ['Permis de construire', `${m.permis || '–'} · dépôt le ${fdate(m.datePC)}`], ['Livraison prévue', fdate(m.dateLivraison)],
+    ['Réglementation', m.regime || 'RE2020'],
+    ['Cadastre', m.cadastre.join(', ')], ['Zone climatique / altitude', `${m.zone || '–'}${m.zoneDeduite ? ' (déduite du département)' : ''} · ${fmt(m.altitude, 0)} m${m.departement ? ' · département ' + m.departement : ''}`],
+    ['Logiciel', m.logiciel ? `${m.logiciel.nom} ${m.logiciel.version} (${m.logiciel.editeur}), étude du ${fdate(m.logiciel.date)}` : ''],
+    ['Version du format', m.versionSchema],
+  ];
+  const brows = [
+    [b.surfLabel === 'SHONrt' ? 'SHONrt' : 'Surface de référence', `${fmtFixed(b.sref)} m²`], ['Surface habitable', b.shab != null ? `${fmtFixed(b.shab)} m²` : '–'],
+    ['Logements / occupants', `${fmt(b.logements, 0)} / ${fmt(b.nOcc, 0)}`], ['Niveaux', `${fmt(b.niveaux, 0)} hors sol, ${fmt(b.sousSol, 0)} en sous-sol`],
+    ['Stationnement', `${fmt(b.parking, 0)} places`], ['Ascenseurs', fmt(b.ascenseurs, 0)],
+    ['Génération', b.generation.map(g => `${g.name}${g.generateurs.length ? ' : ' + g.generateurs.join(', ') : ''}`).join(' ; ') || '–'],
+    ['Ventilation', b.ventilation.join(', ') || '–'],
+    ['Période de référence ACV / chantier', b.periode ? `${fmt(b.periode, 0)} ans / ${fmt(b.dureeChantier, 0)} mois` : ''],
+    ['Exigences de moyens', b.moyens ? `${b.moyens.ok} articles sur ${b.moyens.total} renseignés comme respectés (art. ${b.moyens.arts[0]?.art} à ${b.moyens.arts[b.moyens.arts.length - 1]?.art}) ; les autres sont non concernés ou non renseignés` : '–'],
+  ];
+  const t = rs => `<div class="tbl"><table><tbody>${rs.filter(r => r[1]).map(([k, v]) => `<tr><th style="width:38%;font-weight:600;color:var(--ink-2)">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<h2>Projet et bâtiment</h2><div class="grid2"><div class="panel"><h3>Opération</h3>${t(rows)}</div><div class="panel"><h3>${esc(b.name)}</h3>${t(brows)}</div></div>`;
+}
+
+/* ---------- Graphiques (Chart.js) ---------- */
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+function baseOpts(unit) {
+  const ink2 = cssVar('--ink-2'), line = cssVar('--line');
+  return {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', align: 'start', labels: { color: ink2, boxWidth: 10, boxHeight: 10, font: { family: 'Source Sans 3', size: 12 } } },
+      tooltip: { callbacks: { label: c => `${c.dataset.label} : ${fmt(c.parsed.y, 2)} ${unit}`, footer: items => `Total : ${fmt(items.reduce((s, i) => s + i.parsed.y, 0), 2)} ${unit}` } },
+    },
+    scales: {
+      x: { stacked: true, grid: { display: false }, ticks: { color: ink2, font: { family: 'Source Sans 3' } }, border: { color: cssVar('--line-strong') } },
+      y: { stacked: true, grid: { color: line }, ticks: { color: ink2, font: { family: 'IBM Plex Mono', size: 11 } }, border: { display: false }, title: { display: true, text: unit, color: cssVar('--muted'), font: { family: 'IBM Plex Mono', size: 11 } } },
+    },
+  };
+}
+function drawCharts(b) {
+  if (typeof Chart === 'undefined') { document.querySelectorAll('.chart-box').forEach(x => { x.innerHTML = '<p class="note">Graphiques indisponibles (bibliothèque non chargée).</p>'; x.style.height = 'auto'; }); return; }
+  const surf = cssVar('--surface');
+  const ds = (label, data, color) => ({ label, data, backgroundColor: cssVar(color), borderColor: surf, borderWidth: { top: 2 }, borderSkipped: 'bottom', borderRadius: 0, maxBarThickness: 34 });
+  const c1 = document.getElementById('ch-bbio');
+  if (c1 && b.bbio?.mois?.ch) state.charts.push(new Chart(c1, { type: 'bar', data: { labels: MOIS, datasets: [ds('Chauffage', b.bbio.mois.ch, '--s1'), ds('Refroidissement', b.bbio.mois.fr, '--s3'), ds('Éclairage', b.bbio.mois.ecl, '--s4')] }, options: baseOpts('pts') }));
+  const c2 = document.getElementById('ch-cef');
+  if (c2 && b.cep?.mois) {
+    const M = b.cep.mois;
+    const sets = POSTES.map(([k, l, c]) => ds(l, M[k], c)).filter(s => s.data && s.data.some(v => v > 0));
+    state.charts.push(new Chart(c2, { type: 'bar', data: { labels: MOIS, datasets: sets }, options: baseOpts(b.cep.moisUnit || 'kWhef/m²') }));
+  }
+}
+
+/* ========================================================================
+   4 bis. CHARGES ÉNERGÉTIQUES (consommations conventionnelles × prix)
+   ======================================================================== */
+const PRIX = {
+  elec:   { label: 'Électricité', ref: 0.2001, min: 0.10, max: 0.40, step: 0.0005, src: 'Tarif bleu EDF, option Base 6 kVA, TTC, en vigueur depuis le 1er août 2026' },
+  gaz:    { label: 'Gaz naturel', ref: 0.1456, min: 0.06, max: 0.25, step: 0.0005, src: 'Prix repère de vente du gaz, usage chauffage, octobre 2026, TTC' },
+  reseau: { label: 'Réseau de chaleur', ref: 0.11, min: 0.05, max: 0.20, step: 0.0005, src: 'Ordre de grandeur, abonnement compris : à remplacer par le tarif du réseau' },
+  bois:   { label: 'Bois (granulés)', ref: 0.08, min: 0.04, max: 0.15, step: 0.0005, src: 'Ordre de grandeur pour des granulés en vrac' },
+  fioul:  { label: 'Fioul', ref: 0.115, min: 0.07, max: 0.20, step: 0.0005, src: 'Ordre de grandeur, environ 1,15 € le litre' },
+  gpl:    { label: 'GPL / propane', ref: 0.17, min: 0.08, max: 0.30, step: 0.0005, src: 'Ordre de grandeur' },
+  autre:  { label: 'Autre énergie', ref: 0.12, min: 0.05, max: 0.30, step: 0.0005, src: 'À renseigner selon l\'énergie réelle' },
+  charbon: { label: 'Charbon', ref: 0.10, min: 0.05, max: 0.20, step: 0.0005, src: 'Ordre de grandeur' },
+};
+const COST_REF = { prix: Object.fromEntries(Object.entries(PRIX).map(([k, v]) => [k, v.ref])), abo: 190.32, temp: 19, ecs: 0, autres: true };
+const TEMP_COEF = 0.07; // ADEME : environ 7 % de chauffage en plus par degré au-dessus de 19 °C
+state.cost = JSON.parse(JSON.stringify(COST_REF));
+state.cost.surface = null;
+
+const eur = (v, d = 0) => (v == null || !Number.isFinite(v) ? '–' : new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: d, minimumFractionDigits: d }).format(v));
+const signedEur = v => (v > 0 ? '+' : v < 0 ? '−' : '') + eur(Math.abs(v));
+
+function costOf(b, p) {
+  const C = b.cep; if (!C || !b.sref) return null;
+  const S = b.sref, kT = Math.max(0, 1 + TEMP_COEF * (p.temp - 19)), kE = Math.max(0, 1 + p.ecs / 100);
+  const rows = [];
+  POSTES.forEach(([k, l, c]) => {
+    const po = C.postes[k]; if (!po) return;
+    const f = k === 'ch' ? kT : k === 'ecs' ? kE : 1;
+    const byVec = Object.keys(po.byVec).length ? po.byVec : (po.cef ? { elec: po.cef } : {});
+    let kwh = 0, e = 0;
+    for (const [v, x] of Object.entries(byVec)) { const q = x * S * f; kwh += q; e += q * (p.prix[v] ?? 0); }
+    if (kwh > 0) rows.push({ k, name: l, color: c, kwh, eur: e });
+  });
+  if (p.autres && C.mobilier) { const q = C.mobilier * S; rows.push({ k: 'autres', name: 'Électroménager, multimédia', color: '--muted', kwh: q, eur: q * p.prix.elec }); }
+  const energie = rows.reduce((s, r) => s + r.eur, 0), kwh = rows.reduce((s, r) => s + r.kwh, 0);
+  const nLog = b.logements || 0, abo = p.abo * nLog, total = energie + abo, shab = b.shab || S;
+  return { rows, energie, kwh, abo, total, nLog, shab, perLog: nLog ? total / nLog : null, perM2: total / shab };
+}
+const usedVectors = M => {
+  const s = new Set(['elec']);
+  M.buildings.forEach(b => [b.cep?.vecteurs, b.cepInitial?.vecteurs].forEach(V => Object.entries(V || {}).forEach(([v, x]) => { if (x > 0) s.add(v); })));
+  return Object.keys(PRIX).filter(v => s.has(v));
+};
+const metric = (r) => (r.perLog != null ? r.perLog : r.perM2);
+const metricUnit = (r) => (r.perLog != null ? 'par logement et par an' : 'par m² habitable et par an');
+const withPrices = (p, f) => ({ ...p, prix: Object.fromEntries(Object.entries(p.prix).map(([k, v]) => [k, v * f])), abo: p.abo * f });
+
+function sliderHTML(id, label, val, min, max, step, out, ref) {
+  const pc = (val - min) / (max - min) * 100;
+  return `<div class="lever"><div class="row"><label for="${id}">${esc(label)}</label><output id="${id}-out" for="${id}">${out}</output></div>
+    <input type="range" id="${id}" min="${min}" max="${max}" step="${step}" value="${val}" style="--p:${pc}%">
+    <div class="ref" id="${id}-ref">${ref}</div></div>`;
+}
+function costView(M, b) {
+  const P = state.cost, vecs = usedVectors(M);
+  const avg = b.logements && b.shab ? Math.round(b.shab / b.logements) : 60;
+  if (state.cost.surface == null) state.cost.surface = avg;
+  if (!b.cep) return `<section class="block"><p class="lede">Le fichier ne contient pas les consommations nécessaires (sortie Cep du RSET) pour estimer les charges.</p></section>`;
+  const levers = `<aside class="levers" id="levers" aria-label="Hypothèses">
+    <div class="block-head"><h3>Vos hypothèses</h3><button type="button" class="btn ghost" data-cost-reset>Réinitialiser</button></div>
+    <div class="group"><span class="eyebrow">Prix de l'énergie, TTC</span>
+      ${vecs.map(v => sliderHTML('px-' + v, PRIX[v].label, P.prix[v], PRIX[v].min, PRIX[v].max, PRIX[v].step, fmtFixed(P.prix[v], 4) + ' €/kWh', `<span>${esc(PRIX[v].src)}</span>`)).join('')}
+      ${sliderHTML('abo', 'Abonnement électricité par logement', P.abo, 0, 400, 1, eur(P.abo) + '/an', '<span>Tarif bleu 6 kVA : 190 €/an</span>')}
+    </div>
+    <div class="group"><span class="eyebrow">Usage du logement</span>
+      ${sliderHTML('temp', 'Température de chauffage', P.temp, 17, 23, 0.5, fmt(P.temp) + ' °C', '<span>Calcul conventionnel : 19 °C. Environ 7 % de chauffage par degré (ADEME).</span>')}
+      ${sliderHTML('ecs', 'Consommation d’eau chaude', P.ecs, -40, 60, 5, (P.ecs > 0 ? '+' : '') + P.ecs + ' %', '<span>Écart par rapport au puisage conventionnel</span>')}
+      ${M.buildings.some(x => x.cep?.mobilier) ? `<label class="check" for="autres"><input type="checkbox" id="autres" ${P.autres ? 'checked' : ''}><span>Inclure l'électroménager et le multimédia<br><span class="note">Prévus par le scénario conventionnel, hors exigences réglementaires</span></span></label>` : `<p class="note">Le calcul ${FAMILY === 'dpe' ? 'du DPE' : 'réglementaire'} ne comprend pas l'électroménager ni le multimédia.</p>`}
+    </div>
+    <div class="group"><span class="eyebrow">Logement type</span>
+      ${sliderHTML('surf', 'Surface habitable', P.surface, 15, 150, 1, P.surface + ' m²', `<span>Moyenne du bâtiment : ${avg} m²</span>`)}
+    </div></aside>`;
+  return `<section class="block"><div><span class="eyebrow">${esc(b.name)}${b.logements ? ' · ' + fmt(b.logements, 0) + ' logements' : ''} · ${fmt(b.shab || b.sref, 0)} m² habitables</span>
+      <h2>Estimation des charges énergétiques</h2></div>
+      <p class="lede">Ces montants appliquent des prix de l'énergie aux consommations calculées ${FAMILY === 'dpe' ? 'par le DPE (méthode 3CL)' : FAMILY === 'existant' ? 'par l\'étude RT existant, état après travaux' : 'pour la ' + REGIME}. Le calcul suppose un usage conventionnel du logement : chauffage à 19 °C, besoins d'eau chaude types, météo de référence de la zone ${esc(M.meta.zone || '')}. Faites varier les jauges pour voir l'effet de chaque hypothèse.</p>
+      <div class="cost-layout">${levers}
+        <div style="display:grid;gap:16px;min-width:0">
+          <div id="cost-results"></div>
+          <div class="panel"><h3>Sensibilité aux prix de l'énergie <small>€ ${b.logements ? 'par logement' : 'par m²'} et par an</small></h3>
+            <div class="chart-box"><canvas id="ch-sens" aria-label="Coût annuel selon la variation des prix"></canvas></div>
+            <p class="note">Tous les prix et l'abonnement varient ensemble, à partir de vos hypothèses (0 %). Les courbes pointillées encadrent des comportements d'occupants plus sobres ou plus dépensiers ; le point marque vos réglages.</p></div>
+          <div id="cost-more"></div>
+        </div></div></section>`;
+}
+
+function updateCost() {
+  const M = state.model, b = M.buildings[state.bi], P = state.cost;
+  const box = document.getElementById('cost-results'); if (!box) return;
+  const R = costOf(b, P), R0 = costOf(b, COST_REF);
+  if (!R) { box.innerHTML = '<p class="note">Données de consommation absentes.</p>'; return; }
+  const m = metric(R), m0 = metric(R0), d = m0 ? (m - m0) / m0 : 0;
+  const dCls = Math.abs(d) < 0.005 ? 'same' : d > 0 ? 'up' : 'down';
+  const dTxt = dCls === 'same' ? 'hypothèses de référence' : `${d > 0 ? '+' : '−'}${pct(Math.abs(d))} par rapport aux hypothèses de référence`;
+  const typeCost = R.energie / R.shab * P.surface + (R.nLog ? P.abo : 0);
+  const rows = R.rows.slice().sort((a, c) => c.eur - a.eur);
+  box.innerHTML = `<div class="hero-cost">
+      <div><span class="eyebrow">Charges énergétiques estimées</span>
+        <div class="main"><b>${eur(m)}</b><span>${metricUnit(R)}</span></div>
+        <div class="main" style="margin-top:6px"><span>soit environ <b style="font-size:1.25rem">${eur(m / 12)}</b> par mois</span><span class="delta ${dCls}">${dTxt}</span></div></div>
+      <div class="stats">
+        <div><b>${eur(typeCost)}</b><span>par an pour un logement de ${P.surface} m²</span></div>
+        <div><b>${eur(R.perM2, 1)}</b><span>par m² habitable et par an</span></div>
+        <div><b>${eur(R.total)}</b><span>par an pour tout le bâtiment</span></div>
+        <div><b>${fmt(R.nLog ? R.kwh / R.nLog : R.kwh, 0)} kWh</b><span>consommés par an${R.nLog ? ' et par logement' : ''}</span></div>
+      </div></div>
+    <div class="panel"><h3>Répartition par usage <small>€ par an, bâtiment entier</small></h3>
+      ${hbars([...rows.map(r => ({ name: r.name, sub: fmt(r.kwh, 0) + ' kWh/an', v: Math.round(r.eur), share: r.eur / R.total, color: r.color })), ...(R.abo ? [{ name: 'Abonnements électricité', sub: `${R.nLog} × ${eur(P.abo)}`, v: Math.round(R.abo), share: R.abo / R.total, color: '--line-strong' }] : [])], { d: 0 })}
+      <p class="note">Montants en euros TTC. Le chauffage, l'eau chaude, les pompes et les ascenseurs sont souvent payés via les charges collectives ; l'éclairage privatif et l'électroménager, sur la facture du logement.</p></div>`;
+  updateCostMore(b, R);
+  updateSensChart(b);
+}
+
+function updateCostMore(b, R) {
+  const P = state.cost, el = document.getElementById('cost-more'); if (!el) return;
+  const base = metric(R);
+  const levers = [];
+  usedVectors(state.model).filter(v => Object.values(b.cep.vecteurs).some(x => x > 0) && (b.cep.vecteurs[v] > 0 || (v === 'elec' && P.autres))).forEach(v => {
+    const lo = metric(costOf(b, { ...P, prix: { ...P.prix, [v]: P.prix[v] * 0.8 } })), hi = metric(costOf(b, { ...P, prix: { ...P.prix, [v]: P.prix[v] * 1.2 } }));
+    levers.push({ name: 'Prix ' + PRIX[v].label.toLowerCase(), sub: '−20 % / +20 %', lo, hi });
+  });
+  if (R.nLog) levers.push({ name: 'Abonnement', sub: '−20 % / +20 %', lo: metric(costOf(b, { ...P, abo: P.abo * 0.8 })), hi: metric(costOf(b, { ...P, abo: P.abo * 1.2 })) });
+  levers.push({ name: 'Température de chauffage', sub: `${fmt(P.temp - 1)} °C / ${fmt(P.temp + 1)} °C`, lo: metric(costOf(b, { ...P, temp: P.temp - 1 })), hi: metric(costOf(b, { ...P, temp: P.temp + 1 })) });
+  levers.push({ name: 'Consommation d’eau chaude', sub: '−20 % / +20 %', lo: metric(costOf(b, { ...P, ecs: P.ecs - 20 })), hi: metric(costOf(b, { ...P, ecs: P.ecs + 20 })) });
+  levers.sort((a, c) => (c.hi - c.lo) - (a.hi - a.lo));
+  const span = Math.max(...levers.map(l => Math.max(Math.abs(l.hi - base), Math.abs(base - l.lo)))) || 1;
+  const x = v => 50 + (v - base) / span * 36;
+  const tornado = levers.map(l => `<div class="tor"><div class="name">${esc(l.name)}<small>${esc(l.sub)}</small></div>
+    <div class="bar"><span class="base" style="left:50%"></span>
+      <i class="lo" style="left:${x(l.lo)}%;width:${50 - x(l.lo)}%"></i><i class="hi" style="left:50%;width:${x(l.hi) - 50}%"></i>
+      <em style="right:${100 - x(l.lo) + 1.5}%">${signedEur(l.lo - base)}</em><em style="left:${x(l.hi) + 1.5}%">${signedEur(l.hi - base)}</em></div></div>`).join('');
+  const M = state.model, all = M.buildings.map(bb => ({ bb, r: costOf(bb, P) })).filter(o => o.r);
+  const tot = all.reduce((a, o) => ({ kwh: a.kwh + o.r.kwh, energie: a.energie + o.r.energie, abo: a.abo + o.r.abo, total: a.total + o.r.total, n: a.n + o.r.nLog }), { kwh: 0, energie: 0, abo: 0, total: 0, n: 0 });
+  let extra = '';
+  if (b.cepInitial) {
+    const RI = costOf({ ...b, cep: b.cepInitial }, P);
+    if (RI) {
+      const mi = metric(RI), mp = metric(R), top = Math.max(mi, mp) || 1;
+      extra += `<div class="panel" style="margin-bottom:16px"><h3>Avant et après travaux, avec vos hypothèses <small>€ ${R.nLog ? 'par logement' : 'par m²'} et par an</small></h3>
+      <div class="ba"><div class="ba-row"><span class="ba-l">Avant travaux</span><div class="ba-bar"><i class="before" style="width:${mi / top * 100}%"></i></div><b class="num">${eur(mi)}</b></div>
+      <div class="ba-row"><span class="ba-l">Après travaux</span><div class="ba-bar"><i class="after" style="width:${mp / top * 100}%"></i></div><b class="num">${eur(mp)}</b></div></div>
+      <p class="ba-gain"><b>${eur(mi - mp)}</b> d'économie par ${R.nLog ? 'logement' : 'm²'} et par an, soit ${eur(RI.total - R.total)} pour le bâtiment.</p>${b.cepInitial.assumed ? '<p class="note">L’énergie de chauffage de l’état initial n’est pas précisée : celle du projet est utilisée.</p>' : ''}</div>`;
+    }
+  }
+  if (b.dpe && b.dpe.cout.total && R.nLog) {
+    const D = b.dpe, dep = D.cout.total + ['ch', 'ecs', 'fr'].reduce((s, k) => s + ((D.cout[k + '_dep'] ?? D.cout[k]) - D.cout[k]), 0);
+    extra += `<div class="callout" style="margin-bottom:16px"><b>Repère : l'estimation du DPE.</b> Le diagnostic chiffre lui-même la facture à <b>${eur(D.cout.total / R.nLog)}</b> par logement et par an en usage conventionnel, et <b>${eur(dep / R.nLog)}</b> en usage « dépensier », avec les prix de l'énergie de sa méthode. Votre estimation ci-dessus : <b>${eur(metric(R))}</b>.</div>`;
+  }
+  el.innerHTML = extra + `<div class="grid2">
+    <div class="panel"><h3>Ce qui fait le plus varier la facture <small>€ ${R.nLog ? 'par logement' : 'par m²'} et par an</small></h3>
+      <div class="tornado">${tornado}</div>
+      <p class="note">Chaque ligne fait varier une seule hypothèse autour de vos réglages (${eur(base)}), les autres restant fixes.</p></div>
+    <div class="panel"><h3>Par bâtiment <small>€ TTC par an</small></h3><div class="tbl"><table>
+      <thead><tr><th>Bâtiment</th><th class="r">kWh/an</th><th class="r">Énergie</th><th class="r">Abonn.</th><th class="r">Total</th><th class="r">Par logement</th></tr></thead>
+      <tbody>${all.map(o => `<tr><td style="white-space:nowrap">${esc(o.bb.name)}<br><span class="note">${fmt(o.r.nLog, 0)} logements</span></td><td class="r">${fmt(o.r.kwh, 0)}</td><td class="r">${eur(o.r.energie)}</td><td class="r">${eur(o.r.abo)}</td><td class="r">${eur(o.r.total)}</td><td class="r">${eur(o.r.perLog)}<br><span class="note">${eur(o.r.perLog / 12)}/mois</span></td></tr>`).join('')}
+      ${all.length > 1 ? `<tr class="total"><td>Projet</td><td class="r">${fmt(tot.kwh, 0)}</td><td class="r">${eur(tot.energie)}</td><td class="r">${eur(tot.abo)}</td><td class="r">${eur(tot.total)}</td><td class="r">${tot.n ? eur(tot.total / tot.n) : '–'}</td></tr>` : ''}
+      </tbody></table></div></div></div>
+    <div class="callout" style="margin-top:16px"><b>À lire avec prudence.</b> Le calcul réglementaire décrit un usage moyen, pas des occupants réels : les factures varient fortement selon le nombre d'occupants, leurs habitudes et la météo de l'année. Ces montants servent à comparer des hypothèses, pas à prévoir une facture.</div>`;
+}
+
+function sensData(b) {
+  const P = state.cost, xs = [-30, -20, -10, 0, 10, 20, 30, 40, 50];
+  const profils = [
+    { label: 'Occupants sobres (18 °C, −20 % d\u2019eau chaude)', p: { ...P, temp: 18, ecs: -20 }, col: '--t1', dash: [5, 4] },
+    { label: 'Vos réglages', p: P, col: '--t2', dash: [] },
+    { label: 'Occupants énergivores (21 °C, +30 % d\u2019eau chaude)', p: { ...P, temp: 21, ecs: 30 }, col: '--t3', dash: [5, 4] },
+  ];
+  return { xs, lines: profils.map(pr => ({ ...pr, ys: xs.map(x => Math.round(metric(costOf(b, withPrices(pr.p, 1 + x / 100))))) })), point: Math.round(metric(costOf(b, P))) };
+}
+function updateSensChart(b) {
+  const cv = document.getElementById('ch-sens'); if (!cv || typeof Chart === 'undefined') return;
+  const D = sensData(b);
+  const labels = D.xs.map(x => (x > 0 ? '+' : '') + x + ' %');
+  const pointData = D.xs.map(x => (x === 0 ? D.point : null));
+  if (state.sensChart && state.sensChart.canvas === cv) {
+    D.lines.forEach((l, i) => { state.sensChart.data.datasets[i].data = l.ys; });
+    state.sensChart.data.datasets[3].data = pointData; state.sensChart.update('none'); return;
+  }
+  const o = baseOpts('€');
+  o.scales.x.stacked = false; o.scales.y.stacked = false; o.scales.y.beginAtZero = false;
+  o.scales.x.title = { display: true, text: 'Variation des prix', color: cssVar('--muted'), font: { family: 'Source Sans 3', size: 12 } };
+  o.scales.y.ticks.callback = v => eur(v);
+  o.plugins.tooltip.callbacks = { label: c => `${c.dataset.label} : ${eur(c.parsed.y)}` };
+  o.interaction = { mode: 'nearest', intersect: false, axis: 'x' };
+  o.plugins.legend.labels.filter = item => item.datasetIndex !== 3;
+  state.sensChart = new Chart(cv, { type: 'line', data: { labels, datasets: [
+    ...D.lines.map(l => ({ label: l.label, data: l.ys, borderColor: cssVar(l.col), backgroundColor: cssVar(l.col), borderWidth: 2, borderDash: l.dash, pointRadius: 0, pointHoverRadius: 5, tension: 0 })),
+    { label: 'Vos réglages', data: pointData, type: 'line', showLine: false, pointRadius: 7, pointHoverRadius: 8, borderWidth: 2, borderColor: cssVar('--surface'), backgroundColor: cssVar('--accent') },
+  ] }, options: o });
+  state.charts.push(state.sensChart);
+}
+
+function onCostInput(e) {
+  const t = e.target, P = state.cost; if (!t.closest || !t.closest('#levers')) return;
+  if (t.type === 'range') t.style.setProperty('--p', ((t.value - t.min) / (t.max - t.min) * 100) + '%');
+  const v = parseFloat(t.value), out = document.getElementById(t.id + '-out');
+  if (t.id.startsWith('px-')) { const k = t.id.slice(3); P.prix[k] = v; out.textContent = fmtFixed(v, 4) + ' €/kWh'; markRef(t, Math.abs(v - PRIX[k].ref) > 1e-9); }
+  else if (t.id === 'abo') { P.abo = v; out.textContent = eur(v) + '/an'; markRef(t, Math.abs(v - COST_REF.abo) > 0.5); }
+  else if (t.id === 'temp') { P.temp = v; out.textContent = fmt(v) + ' °C'; markRef(t, v !== 19); }
+  else if (t.id === 'ecs') { P.ecs = v; out.textContent = (v > 0 ? '+' : '') + v + ' %'; markRef(t, v !== 0); }
+  else if (t.id === 'surf') { P.surface = v; out.textContent = v + ' m²'; }
+  else if (t.id === 'autres') { P.autres = t.checked; }
+  updateCost();
+}
+function markRef(input, changed) { const r = document.getElementById(input.id + '-ref'); if (r) r.classList.toggle('changed', changed); }
+
+/* ========================================================================
+   6. EXISTANT : RT existant globale (dossier de contrôle Th-C-E ex) et DPE (format ADEME)
+   ======================================================================== */
+const aval = e => { if (!e) return null; const v = parseFloat((e.getAttribute('Valeur') || '').replace(/\s/g, '').replace(',', '.')); return Number.isFinite(v) ? v : null; };
+const tri = e => ({ initial: num(e, 'initial'), projet: num(e, 'projet'), reference: num(e, 'reference') });
+const vecsOf = p => { const o = {}; Object.values(p || {}).forEach(x => Object.entries(x.byVec || {}).forEach(([v, q]) => { o[v] = (o[v] || 0) + q; })); return o; };
+const pretty = t => { const s = String(t || '').replace(/_/g, ' ').trim(); return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
+function addrOf(a) {
+  if (!a) return null;
+  const o = { rue: txt(a, 'name') || kids(a, 'ligne').map(l => l.textContent.trim()).filter(Boolean).join(', '), cp: txt(a, 'postcode') || txt(a, 'code_postal'), ville: txt(a, 'city') || txt(a, 'ville') };
+  return (o.rue || o.cp || o.ville) ? o : null;
+}
+
+/* ---------- Détection du format ---------- */
+function parseAny(xmlText) {
+  const doc = new DOMParser().parseFromString(xmlText, 'application/xml');
+  if (doc.getElementsByTagName('parsererror').length) throw new Error("Le fichier n'est pas un XML valide.");
+  const r = doc.documentElement.localName;
+  if (r === 'dpe') return parseDPE(doc);
+  if (r === 'dossier_controle') return parseRTEX(doc);
+  const M = parseRE2020(xmlText); M.meta.family = 'neuf'; return M;
+}
+
+/* ---------- RT existant globale ---------- */
+const THV = { Electrique: 'elec', Gaz: 'gaz', Fioul: 'fioul', reseau_de_chaleur: 'reseau', bois: 'bois', Autre_energie: 'autre' };
+const EQV = { effet_joule: 'elec', thermodynamique: 'elec', gaz: 'gaz', fioul: 'fioul', reseaux_chaleur: 'reseau', bois: 'bois', solaire: 'solaire' };
+const EQV_LBL = { effet_joule: 'électricité (effet Joule)', thermodynamique: 'pompe à chaleur', gaz: 'gaz', fioul: 'fioul', reseaux_chaleur: 'réseau de chaleur', bois: 'bois', solaire: 'solaire' };
+const VENT_LBL = { naturelle_conduit: 'ventilation naturelle par conduits', naturelle: 'ventilation naturelle', simple_flux: 'VMC simple flux', double_flux: 'VMC double flux', hygro_a: 'VMC hygro A', hygro_b: 'VMC hygro B' };
+const RTEX_POSTES = [['ch', 'Chauffage'], ['fr', 'Refroidissement'], ['ecs', 'ECS'], ['ecl', 'Eclairage'], ['auxvent', 'Aux_ventilation'], ['auxdist', 'Aux_generation_distribution']];
+
+function thPostes(B) {
+  const EF = kid(B, 'Energie_finale'), EP = kid(B, 'Energie_primaire'), p = {};
+  RTEX_POSTES.forEach(([k, n]) => {
+    const ef = kid(EF, n), byVec = {};
+    if (ef) for (const c of ef.children) { const v = THV[c.localName], x = aval(c); if (v && x) byVec[v] = (byVec[v] || 0) + x; }
+    const cef = aval(ef) || 0;
+    if (!Object.keys(byVec).length && cef) byVec.elec = cef;
+    p[k] = { cef, cep: aval(kid(EP, n)) || 0, byVec };
+  });
+  return p;
+}
+const flagged = (node, w) => Array.from(node?.children || []).filter(c => EQV[c.localName] && num(c, w) === 1).map(c => c.localName);
+function rcPostes(rc, w, vCh, vEcs, S) {
+  const p = {}, g = n => num(kid(rc, n), w) || 0;
+  const add = (k, v, x) => { if (!x) return; p[k] = p[k] || { cef: 0, cep: 0, byVec: {} }; p[k].byVec[v] = (p[k].byVec[v] || 0) + x / S; p[k].cef += x / S; };
+  add('ch', 'elec', g('dt_chauf_elec')); add('ch', 'bois', g('dt_chauf_bois')); add('ch', vCh, g('dt_chauf_autre'));
+  add('fr', 'elec', g('dt_refroid_elec')); add('fr', vCh, g('dt_refroid_autre'));
+  add('ecs', 'elec', g('dt_ecs_elec')); add('ecs', 'bois', g('dt_ecs_bois')); add('ecs', vEcs, g('dt_ecs_autres'));
+  add('auxvent', 'elec', g('dt_aux_ventil')); add('auxdist', 'elec', g('dt_aux_generation') + g('dt_aux_distribution')); add('ecl', 'elec', g('dt_eclairage'));
+  return p;
+}
+
+function parseRTEX(doc) {
+  const root = doc.documentElement, fa = kid(root, 'feuillet_administratif'), op = kid(fa, 'operation'), aut = kid(fa, 'auteur_etude_thermique');
+  const dept = txt(op, 'num_departement');
+  const meta = {
+    family: 'existant', regime: 'RT existant',
+    operation: txt(op, 'nom') || 'Projet sans nom', description: '', adresse: addrOf(kid(op, 'adresse')),
+    permis: txt(op, 'num_permis'), datePC: '', dateLivraison: '', cadastre: [],
+    zone: txt(op, 'zone_climatique') || ZONE_DEPT[dept.padStart(2, '0')] || '', zoneDeduite: !txt(op, 'zone_climatique'),
+    altitude: num(op, 'altitude'), departement: dept,
+    moa: txt(at(fa, 'maitre_ouvrage'), 'nom'), moe: txt(at(fa, 'maitre_oeuvre'), 'nom'), bet: txt(aut, 'nom'),
+    controle: txt(at(fa, 'bureau_controle'), 'nom'),
+    logiciel: txt(aut, 'nom_logiciel') ? { nom: txt(aut, 'nom_logiciel'), editeur: txt(aut, 'editeur_logiciel'), version: txt(aut, 'version_logiciel'), date: txt(aut, 'date_etude'), moteur: txt(aut, 'version_thce') } : null,
+    versionSchema: root.getAttribute('idxsd') || '',
+  };
+  const thP = kids(at(root, 'datain', 'out_project', 'THCEX'), 'Batiment'), thR = kids(at(root, 'datain', 'out_reference', 'THCEX'), 'Batiment');
+  const equip = kids(kid(root, 'equipements'), 'feuillet_equipement'), gens = kids(kid(root, 'chaufferies'), 'feuillet_generation');
+  const buildings = kids(kid(root, 'batiments'), 'feuillet_batiment').map((fb, i) => {
+    const dg = kid(fb, 'donnees_generales'), d = kid(dg, 'descriptif'), rc = kid(dg, 'resultat_calcul_C');
+    const P = thP[i] || thP[0], R = thR[i] || thR[0], eq = equip[i] || equip[0], gn = gens[i] || gens[0];
+    const shon = num(d, 'shon') || aval(at(P, 'H', 'Shon')), su = num(d, 'surface_utile');
+    const chE = { initial: flagged(at(eq, 'chauffage', 'energies'), 'initial'), projet: flagged(at(eq, 'chauffage', 'energies'), 'projet') };
+    const ecsE = { initial: flagged(at(eq, 'ECS', 'type_energie'), 'initial'), projet: flagged(at(eq, 'ECS', 'type_energie'), 'projet') };
+    const autreVec = list => list.map(t => EQV[t]).find(v => v && !['elec', 'bois', 'solaire'].includes(v));
+    const pP = thPostes(P), pR = thPostes(R);
+    const vChP = Object.keys(pP.ch.byVec).find(v => v !== 'elec' && v !== 'bois') || 'gaz';
+    const vCh = autreVec(chE.initial) || vChP, vEcs = autreVec(ecsE.initial) || vCh;
+    const ts = at(fb, 'enveloppe_thermique', 'descriptif_parois', 'transmission_surfacique');
+    const pt = at(fb, 'enveloppe_thermique', 'descriptif_parois', 'pertes_thermiques');
+    const st = at(fb, 'enveloppe_thermique', 'descriptif_parois', 'surf_totales');
+    const ticGroups = kids(dg, 'resultat_calcul_Tic').map(g => ({ zone: '', name: txt(g, 'libelle') || 'Groupe', tic: num(g, 'projet'), ref: num(g, 'reference') })).filter(g => g.tic != null && g.ref != null);
+    const epP = kid(P, 'Energie_primaire');
+    const cepAll = tri(kid(rc, 'coeff_cep'));
+    const cls = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'L8', 'L9', 'L10', 'autres_ponts'];
+    const parois = kid(fb, 'parois');
+    const b = {
+      id: String(i + 1), name: txt(d, 'identifiant') || 'Bâtiment ' + (i + 1),
+      sref: shon, surfLabel: 'SHON', shab: su || null, logements: num(d, 'nb_logements') || null, annee: num(d, 'annee_const'),
+      ventilation: [], generation: [], parking: 0, ascenseurs: 0,
+      cep: { cep: aval(kid(epP, 'Cep')) ?? cepAll.projet, cef: aval(at(P, 'Energie_finale', 'C')), mobilier: null, postes: pP, vecteurs: vecsOf(pP) },
+      cepRef: { cep: aval(at(R, 'Energie_primaire', 'Cep')) ?? cepAll.reference, cef: aval(at(R, 'Energie_finale', 'C')), postes: pR },
+      cepInitial: { cep: cepAll.initial, postes: rcPostes(rc, 'initial', vCh, vEcs, shon), assumed: !autreVec(chE.initial) },
+      rtex: {
+        cep: { initial: cepAll.initial, projet: aval(kid(epP, 'Cep')) ?? cepAll.projet, reference: aval(at(R, 'Energie_primaire', 'Cep')) ?? cepAll.reference },
+        cepP: aval(kid(epP, 'Cep_p')), cepMax: aval(kid(epP, 'Cep_max')),
+        ubat: { ...tri(kid(ts, 'Ubat')), max: num(kid(ts, 'Ubat_max'), 'projet') },
+        classes: cls.map(c => ({ c, u: tri(kid(ts, c)), h: tri(kid(pt, c)), s: tri(kid(st, c)) })).filter(x => [x.h.initial, x.h.projet, x.h.reference].some(v => v)),
+        htot: tri(kid(pt, 'pertes_totales_ht')), permea: tri(kid(st, 'coef_permea_air')),
+        rc: ['initial', 'projet', 'reference'].reduce((o, w) => { o[w] = rcPostes(rc, w, w === 'initial' ? vCh : vChP, w === 'initial' ? vEcs : vChP, 1); return o; }, {}),
+        besoins: { ch: tri(kid(rc, 'besoins_chaud')), fr: tri(kid(rc, 'besoins_froid')), ecs: tri(kid(rc, 'besoins_therm_ecs')) },
+        energies: { ch: chE, ecs: ecsE },
+        ventil: { initial: Array.from(at(eq, 'ventilation', 'ventil_initiale')?.children || []).map(c => c.localName), projet: Array.from(at(eq, 'ventilation', 'type_ventilation')?.children || []).map(c => c.localName) },
+        generateurs: kids(kid(gn, 'generateurs'), 'descriptif').map(g => ({ nom: txt(g, 'deno_comm_gene'), puissance: num(g, 'puissance') })),
+        opaques: Array.from(kid(parois, 'parois_opaques')?.children || []).map(p => ({ groupe: p.localName, name: txt(p, 'libelle_paroi'), S: num(p, 'surface_totale'), Ui: num(p, 'U_initial'), U: num(p, 'U_paroi'), Uref: num(p, 'U_ref'), R: num(p, 'resistance_thermique_isolant'), origine: txt(p, 'origine_donnee') })),
+        vitrees: Array.from(kid(parois, 'parois_vitrees')?.children || []).map(p => ({ name: txt(p, 'code'), S: num(p, 'surface_totale'), Ui: num(p, 'U_initial'), U: num(p, 'U_paroi_vitree'), Uref: num(p, 'U_ref'), Ug: num(p, 'Ug_vitrage') })),
+        liaisons: Array.from(kid(parois, 'liaisons')?.children || []).map(p => ({ type: p.localName, L: num(p, 'lineaire'), psiI: num(p, 'psi_initial'), psi: num(p, 'psi_liaison'), psiRef: num(p, 'psi_ref_U') })),
+        travaux: num(d, 'travaux_rtg'),
+      },
+    };
+    b.cepInitial.vecteurs = vecsOf(b.cepInitial.postes);
+    if (ticGroups.length) { const w = ticGroups.reduce((a, g) => ((g.tic - g.ref) > (a.tic - a.ref) ? g : a), ticGroups[0]); b.tic = { val: w.tic, max: w.ref, groups: ticGroups }; }
+    return b;
+  });
+  if (!buildings.length) throw new Error("Aucun bâtiment n'a été trouvé dans le dossier RT existant.");
+  return { meta, generations: [], buildings, parsedAt: new Date().toISOString() };
+}
+
+/* ---------- DPE (format ADEME) ---------- */
+const ZONE_ENUM = { 1: 'H1a', 2: 'H1b', 3: 'H1c', 4: 'H2a', 5: 'H2b', 6: 'H2c', 7: 'H2d', 8: 'H3' };
+const VEC_DPE = { 1: 'elec', 2: 'gaz', 3: 'fioul', 4: 'bois', 5: 'bois', 6: 'bois', 7: 'bois', 8: 'reseau', 9: 'gpl', 10: 'gpl', 11: 'charbon', 12: 'elec', 13: 'gpl', 14: 'reseau', 15: 'reseau' };
+const QUAL = { 1: ['Très bonne', 'ok'], 2: ['Bonne', 'ok'], 3: ['Moyenne', 'warn'], 4: ['Insuffisante', 'bad'] };
+const DPE_SEUILS = { ep: [70, 110, 180, 250, 330, 420], ges: [6, 11, 30, 50, 70, 100] };
+const CLASSES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const classOf = (v, s) => (v == null ? null : CLASSES[s.findIndex(x => v <= x) === -1 ? 6 : s.findIndex(x => v <= x)]);
+const worst = (a, b) => (CLASSES.indexOf(a) >= CLASSES.indexOf(b) ? a : b);
+const DPE_USAGES = [['ch', 'ch', 'Chauffage'], ['ecs', 'ecs', 'Eau chaude sanitaire'], ['fr', 'fr', 'Refroidissement'], ['ecl', 'eclairage', 'Éclairage'], ['auxvent', 'auxiliaire_ventilation', 'Ventilation (auxiliaires)']];
+
+function dpeUsages(el, prefix, total5) {
+  const o = {}, g = n => num(el, `${prefix}${n}`) || 0;
+  DPE_USAGES.forEach(([k, n]) => { o[k] = g(n); o[k + '_dep'] = num(el, `${prefix}${n}_depensier`); });
+  const rest = (num(el, `${prefix}5_usages`) || 0) - ['ch', 'ecs', 'fr', 'ecl', 'auxvent'].reduce((s, k) => s + o[k], 0);
+  o.auxdist = rest > 0.5 ? rest : 0;
+  o.total = num(el, `${prefix}5_usages`); o.m2 = num(el, `${prefix}5_usages_m2`);
+  return o;
+}
+
+function parseDPE(doc) {
+  const root = doc.documentElement, adm = kid(root, 'administratif'), lg = kid(root, 'logement');
+  const cg = kid(lg, 'caracteristique_generale'), s = kid(lg, 'sortie'), meteo = kid(lg, 'meteo'), diag = kid(adm, 'diagnostiqueur');
+  const ab = at(adm, 'geolocalisation', 'adresses', 'adresse_bien');
+  const rue = [txt(ab, 'ban_housenumber'), txt(ab, 'ban_street')].filter(Boolean).join(' ') || txt(ab, 'adresse_brut');
+  const cp = txt(ab, 'ban_postcode') || txt(ab, 'code_postal_brut'), ville = txt(ab, 'ban_city') || txt(ab, 'nom_commune_brut');
+  const S = num(cg, 'surface_habitable_logement') ?? num(cg, 'surface_habitable_immeuble') ?? num(cg, 'surface_habitable_immeuble_saisie');
+  const nLog = num(cg, 'nombre_appartement') || 1;
+  const ef = dpeUsages(kid(s, 'ef_conso'), 'conso_'), ep = dpeUsages(kid(s, 'ep_conso'), 'ep_conso_'), ges = dpeUsages(kid(s, 'emission_ges'), 'emission_ges_'), cout = dpeUsages(kid(s, 'cout'), 'cout_');
+  /* Énergie de chaque installation, pondérée par la consommation des générateurs */
+  const share = (coll, inst, gcoll, gtag, consoTag) => {
+    const w = {};
+    kids(kid(lg, coll), inst).forEach(ins => kids(kid(ins, gcoll), gtag).forEach(g => {
+      const v = VEC_DPE[num(at(g, 'donnee_entree'), 'enum_type_energie_id')] || 'autre';
+      const c = num(kid(g, 'donnee_intermediaire'), consoTag) || 1; w[v] = (w[v] || 0) + c;
+    }));
+    const t = Object.values(w).reduce((a, b) => a + b, 0) || 1; Object.keys(w).forEach(k => { w[k] /= t; }); return w;
+  };
+  const wCh = share('installation_chauffage_collection', 'installation_chauffage', 'generateur_chauffage_collection', 'generateur_chauffage', 'conso_ch');
+  const wEcs = share('installation_ecs_collection', 'installation_ecs', 'generateur_ecs_collection', 'generateur_ecs', 'conso_ecs');
+  const split = (x, w) => { const o = {}; Object.entries(Object.keys(w).length ? w : { elec: 1 }).forEach(([v, f]) => { if (x * f) o[v] = x * f / S; }); return o; };
+  const postes = {
+    ch: { cef: ef.ch / S, cep: ep.ch / S, byVec: split(ef.ch, wCh) }, ecs: { cef: ef.ecs / S, cep: ep.ecs / S, byVec: split(ef.ecs, wEcs) },
+    fr: { cef: ef.fr / S, cep: ep.fr / S, byVec: ef.fr ? { elec: ef.fr / S } : {} }, ecl: { cef: ef.ecl / S, cep: ep.ecl / S, byVec: ef.ecl ? { elec: ef.ecl / S } : {} },
+    auxvent: { cef: ef.auxvent / S, cep: ep.auxvent / S, byVec: ef.auxvent ? { elec: ef.auxvent / S } : {} }, auxdist: { cef: ef.auxdist / S, cep: ep.auxdist / S, byVec: ef.auxdist ? { elec: ef.auxdist / S } : {} },
+  };
+  const parEnergie = kids(kid(s, 'sortie_par_energie_collection'), 'sortie_par_energie').map(e => ({ vec: VEC_DPE[num(e, 'enum_type_energie_id')] || 'autre', id: num(e, 'enum_type_energie_id'), conso: num(e, 'conso_5_usages'), ges: num(e, 'emission_ges_5_usages'), cout: num(e, 'cout_5_usages') }));
+  const elecEF = parEnergie.filter(e => e.vec === 'elec').reduce((a, e) => a + (e.conso || 0), 0);
+  const dateEtab = txt(adm, 'date_etablissement_dpe');
+  const classe = txt(kid(s, 'ep_conso'), 'classe_bilan_dpe'), classeGes = txt(kid(s, 'emission_ges'), 'classe_emission_ges');
+  let reforme = null;
+  if (dateEtab && dateEtab < '2026-01-01' && elecEF > 0 && ep.total && S) {
+    const epM2 = (ep.total - elecEF * 0.4) / S;
+    reforme = { epM2, classeEp: classOf(epM2, DPE_SEUILS.ep), classe: worst(classOf(epM2, DPE_SEUILS.ep), classOf(ges.m2, DPE_SEUILS.ges)) };
+  }
+  const env = kid(lg, 'enveloppe');
+  const list = (c, t, f) => kids(kid(env, c), t).map(e => f(kid(e, 'donnee_entree'), kid(e, 'donnee_intermediaire')));
+  const desc = (coll, inst, gcoll, gtag, ecoll, etag) => kids(kid(lg, coll), inst).map(ins => ({
+    install: txt(kid(ins, 'donnee_entree'), 'description'),
+    gens: kids(kid(ins, gcoll), gtag).map(g => ({ d: txt(kid(g, 'donnee_entree'), 'description'), vec: VEC_DPE[num(kid(g, 'donnee_entree'), 'enum_type_energie_id')] })),
+    ems: ecoll ? kids(kid(ins, ecoll), etag).map(e => txt(kid(e, 'donnee_entree'), 'description')).filter(Boolean) : [],
+  }));
+  const qi = kid(s, 'qualite_isolation'), dep = kid(s, 'deperdition'), apb = kid(s, 'apport_et_besoin');
+  const b = {
+    id: '1', name: txt(ab, 'compl_ref_logement') || 'Bâtiment', sref: S, surfLabel: 'SHAB', shab: S, logements: nLog,
+    annee: num(cg, 'annee_construction'), niveaux: num(cg, 'nombre_niveau_immeuble'), hsp: num(cg, 'hsp'),
+    ventilation: [], generation: [], parking: 0, ascenseurs: 0,
+    cep: { cep: ep.m2, cef: ef.m2, mobilier: null, postes, vecteurs: vecsOf(postes) },
+    dpe: {
+      classe, classeGes, classeEp: classOf(ep.m2, DPE_SEUILS.ep), epM2: ep.m2, gesM2: ges.m2, ef, ep, ges, cout, parEnergie, elecEF, reforme,
+      ubat: num(qi, 'ubat'),
+      qualite: [['Enveloppe', 'qualite_isol_enveloppe'], ['Murs', 'qualite_isol_mur'], ['Planchers bas', 'qualite_isol_plancher_bas'], ['Toiture / plancher haut', 'qualite_isol_plancher_haut_toit_terrasse'], ['Toiture / combles', 'qualite_isol_plancher_haut_comble_perdu'], ['Menuiseries', 'qualite_isol_menuiserie']].map(([l, t]) => ({ l, v: num(qi, t) })).filter(x => x.v),
+      deperd: [['Renouvellement d’air', 'deperdition_renouvellement_air'], ['Murs', 'deperdition_mur'], ['Planchers bas', 'deperdition_plancher_bas'], ['Planchers hauts / toiture', 'deperdition_plancher_haut'], ['Baies vitrées', 'deperdition_baie_vitree'], ['Portes', 'deperdition_porte'], ['Ponts thermiques', 'deperdition_pont_thermique']].map(([l, t]) => ({ l, v: num(dep, t) || 0 })),
+      besoins: { ch: num(apb, 'besoin_ch'), ecs: num(apb, 'besoin_ecs') },
+      murs: list('mur_collection', 'mur', (i, m) => ({ ref: txt(i, 'reference'), desc: txt(i, 'description'), S: num(i, 'surface_paroi_opaque'), U: num(m, 'umur'), b: num(m, 'b') })),
+      pb: list('plancher_bas_collection', 'plancher_bas', (i, m) => ({ ref: txt(i, 'reference'), desc: txt(i, 'description'), S: num(i, 'surface_paroi_opaque'), U: num(m, 'upb_final') ?? num(m, 'upb'), b: num(m, 'b') })),
+      ph: list('plancher_haut_collection', 'plancher_haut', (i, m) => ({ ref: txt(i, 'reference'), desc: txt(i, 'description'), S: num(i, 'surface_paroi_opaque'), U: num(m, 'uph'), b: num(m, 'b') })),
+      baies: list('baie_vitree_collection', 'baie_vitree', (i, m) => ({ ref: txt(i, 'reference'), desc: txt(i, 'description'), S: num(i, 'surface_totale_baie'), n: num(i, 'nb_baie'), U: num(m, 'uw'), Sw: num(m, 'sw') })),
+      portes: list('porte_collection', 'porte', (i, m) => ({ ref: txt(i, 'reference'), desc: txt(i, 'description'), S: num(i, 'surface_porte'), U: num(m, 'uporte') })),
+      ponts: list('pont_thermique_collection', 'pont_thermique', (i, m) => ({ desc: txt(i, 'description') || txt(i, 'reference'), L: num(i, 'l'), k: num(m, 'k') })),
+      chauffage: desc('installation_chauffage_collection', 'installation_chauffage', 'generateur_chauffage_collection', 'generateur_chauffage', 'emetteur_chauffage_collection', 'emetteur_chauffage'),
+      ecs: desc('installation_ecs_collection', 'installation_ecs', 'generateur_ecs_collection', 'generateur_ecs'),
+      gestes: kids(kid(root, 'descriptif_geste_entretien_collection'), 'descriptif_geste_entretien').map(g => txt(g, 'description')).filter(Boolean),
+      pv: num(kid(s, 'production_electricite'), 'production_pv'),
+    },
+  };
+  const meta = {
+    family: 'dpe', regime: 'DPE',
+    operation: (nLog > 1 ? 'DPE immeuble' : 'DPE logement') + (ville ? ' · ' + ville : ''),
+    description: b.name, adresse: (rue || cp || ville) ? { rue, cp, ville } : null,
+    zone: ZONE_ENUM[num(meteo, 'enum_zone_climatique_id')] || ZONE_DEPT[cp.slice(0, 2)] || '', altitude: num(meteo, 'altitude'), departement: cp.slice(0, 2),
+    moa: txt(adm, 'nom_proprietaire'), moe: '', bet: [txt(diag, 'prenom_diagnostiqueur'), txt(diag, 'nom_diagnostiqueur')].filter(Boolean).join(' ') || txt(diag, 'entreprise_diagnostiqueur'),
+    entreprise: txt(diag, 'entreprise_diagnostiqueur'), certification: txt(diag, 'numero_certification_diagnostiqueur'),
+    dateEtab, dateVisite: txt(adm, 'date_visite_diagnostiqueur'), numero: txt(adm, 'numero_dpe'),
+    logiciel: { nom: txt(diag, 'version_logiciel'), editeur: '', version: '', date: dateEtab, moteur: txt(diag, 'version_moteur_calcul') },
+    versionSchema: root.getAttribute('version') || '', methode: txt(adm, 'enum_version_id'), cadastre: [], permis: '', datePC: '',
+  };
+  return { meta, generations: [], buildings: [b], parsedAt: new Date().toISOString() };
+}
+
+/* ---------- Indicateurs RT existant ---------- */
+const IND_EXISTANT = [
+  { key: 'cep', theme: 'energie', title: 'Consommation d’énergie', tech: 'Cep ≤ Cep réf.', unit: 'kWhep/(m² SHON.an)', seuilLbl: 'réf.',
+    get: b => [b.rtex?.cep.projet, b.rtex?.cep.reference], initial: b => b.rtex?.cep.initial,
+    expl: "L'énergie primaire consommée après travaux (chauffage, eau chaude, ventilation, éclairage). Elle doit rester sous celle du même bâtiment rénové avec des solutions de référence." },
+  { key: 'cepmax', theme: 'energie', title: 'Plafond de consommation', tech: 'Cep ch+fr+ECS ≤ Cep max', unit: 'kWhep/(m² SHON.an)',
+    get: b => [b.rtex?.cepP ?? b.rtex?.cep.projet, b.rtex?.cepMax],
+    expl: "Pour les logements, le chauffage, le refroidissement et l'eau chaude ne doivent pas dépasser un plafond qui dépend de la zone climatique et de l'énergie de chauffage." },
+  { key: 'ubat', theme: 'isolation', title: 'Isolation de l’enveloppe', tech: 'Ubat ≤ Ubat max', unit: 'W/(m².K)', dec: 3,
+    get: b => [b.rtex?.ubat.projet, b.rtex?.ubat.max], initial: b => b.rtex?.ubat.initial,
+    expl: "Les pertes de chaleur moyennes à travers les murs, la toiture, les planchers, les fenêtres et les ponts thermiques. Plus il est bas, mieux le bâtiment est isolé." },
+  { key: 'tic', theme: 'confort', title: 'Confort en été', tech: 'Tic ≤ Tic réf.', unit: '°C', absVig: 0.5, scaleMin: 20, seuilLbl: 'réf.',
+    get: b => [b.tic?.val, b.tic?.max],
+    expl: "La température intérieure la plus chaude atteinte lors d'une journée chaude type. Elle doit rester sous celle du bâtiment de référence." },
+];
+
+/* ---------- Avant / après (RT existant) ---------- */
+function beforeAfterBlock(M, b) {
+  const X = b.rtex; if (!X) return '';
+  const ci = X.cep.initial, cp = X.cep.projet, cr = X.cep.reference;
+  const gain = ci ? (ci - cp) / ci : null;
+  const top = Math.max(ci || 0, cp || 0, cr || 0) || 1;
+  const bar = (lbl, v, cls, sub) => `<div class="ba-row"><span class="ba-l">${lbl}</span><div class="ba-bar"><i class="${cls}" style="width:${(v || 0) / top * 100}%"></i></div><b class="num">${fmt(v)}</b>${sub ? `<small>${sub}</small>` : ''}</div>`;
+  const uI = X.ubat.initial, uP = X.ubat.projet;
+  const cI = b.cepInitial ? costOf({ ...b, cep: b.cepInitial }, COST_REF) : null, cP = costOf(b, COST_REF);
+  const usage = POSTES.filter(([k]) => (b.cepInitial?.postes[k]?.cef || 0) + (b.cep.postes[k]?.cef || 0) > 0).map(([k, l, c]) => ({ k, l, c, i: (b.cepInitial?.postes[k]?.cef || 0) * b.sref, p: (b.cep.postes[k]?.cef || 0) * b.sref }));
+  const umax = Math.max(1, ...usage.map(u => Math.max(u.i, u.p)));
+  return `<section class="block"><div><span class="eyebrow">${esc(b.name)}${b.annee ? ' · construit en ' + b.annee : ''}</span><h2>Avant et après travaux</h2></div>
+    <p class="lede">L'étude compare l'état actuel du bâtiment, le projet de rénovation et un bâtiment de référence rénové avec des solutions standard.</p>
+    <div class="grid2">
+      <div class="panel"><h3>Consommation d'énergie <small>kWhep/(m² SHON.an)</small></h3>
+        <div class="ba">${bar('Avant travaux', ci, 'before')}${bar('Après travaux', cp, 'after')}${bar('Référence', cr, 'ref')}</div>
+        ${gain != null ? `<p class="ba-gain"><b>${gain >= 0 ? '−' : '+'}${pct(Math.abs(gain))}</b> de consommation d'énergie grâce aux travaux</p>` : ''}</div>
+      <div class="panel"><h3>Ce que ça change concrètement</h3>
+        <div class="stats">
+          ${uI != null && uP != null ? `<div><b>${fmt(uI, 2)} → ${fmt(uP, 2)}</b><span>Ubat en W/(m².K) : ${pct((uI - uP) / uI)} de pertes en moins par les parois</span></div>` : ''}
+          ${X.permea.initial != null && X.permea.projet != null ? `<div><b>${fmt(X.permea.initial, 1)} → ${fmt(X.permea.projet, 1)}</b><span>perméabilité à l'air en m³/(h.m²)</span></div>` : ''}
+          ${cI && cP && cI.perLog ? `<div><b>${eur(cI.perLog)} → ${eur(cP.perLog)}</b><span>charges énergétiques estimées par logement et par an, soit ${eur(cI.perLog - cP.perLog)} d'économie</span></div>` : ''}
+        </div>
+        ${b.cepInitial?.assumed ? '<p class="note">Énergie de chauffage de l’état initial non précisée dans le fichier : celle du projet est utilisée pour le chiffrage.</p>' : ''}
+        <p class="note">Charges calculées aux prix de référence de l'onglet « Charges énergétiques », hors électroménager.</p></div>
+      <div class="panel" style="grid-column:1/-1"><h3>Consommation finale par usage <small>kWh par an, bâtiment entier</small></h3>
+        <div class="legend"><span><i style="background:var(--before)"></i>Avant travaux</span><span><i style="background:var(--accent)"></i>Après travaux</span></div>
+        <div class="ba-usages">${usage.map(u => `<div class="bau"><span class="ba-l">${esc(u.l)}</span>
+          <div class="ba-bars"><div class="ba-bar"><i class="before" style="width:${u.i / umax * 100}%"></i></div><div class="ba-bar"><i class="after" style="width:${u.p / umax * 100}%"></i></div></div>
+          <span class="num ba-v">${fmt(u.i, 0)}<br>${fmt(u.p, 0)}</span><span class="ba-d ${!u.i || Math.abs(u.p - u.i) / u.i < 0.005 ? '' : u.p < u.i ? 'down' : 'up'}">${!u.i ? '' : Math.abs(u.p - u.i) / u.i < 0.005 ? '=' : (u.p < u.i ? '−' : '+') + pct(Math.abs(u.p - u.i) / u.i)}</span></div>`).join('')}</div></div>
+    </div></section>`;
+}
+
+function factsEx(M, b) {
+  const X = b.rtex; if (!X) return '';
+  const F = [];
+  const enLbl = l => l.map(t => EQV_LBL[t] || pretty(t)).join(', ') || '–';
+  const chI = enLbl(X.energies.ch.initial), chP = enLbl(X.energies.ch.projet);
+  F.push(['Chauffage', chI === chP ? `<b>${esc(chP)}</b>, inchangé par les travaux.${X.generateurs.length ? ' ' + esc(X.generateurs.map(g => g.nom).filter(Boolean).join(', ')) + '.' : ''}` : `<b>${esc(chI)}</b> avant travaux, <b>${esc(chP)}</b> après.`]);
+  const vI = X.ventil.initial.map(t => VENT_LBL[t] || pretty(t)).join(', '), vP = X.ventil.projet.map(t => VENT_LBL[t] || pretty(t)).join(', ');
+  if (vI || vP) F.push(['Ventilation', vI && vP && vI !== vP ? `Passage d'une <b>${esc(vI)}</b> à une <b>${esc(vP)}</b>.` : `<b>${esc(vP || vI)}</b>.`]);
+  const top = X.classes.filter(c => c.h.projet).sort((a, c) => c.h.projet - a.h.projet)[0];
+  const opq = X.opaques.filter(o => o.Ui != null && o.U != null && o.U < o.Ui).length + X.opaques.filter(o => o.Ui == null).length;
+  if (X.opaques.length) F.push(['Parois', `${X.opaques.filter(o => o.Ui == null).length} paroi${X.opaques.filter(o => o.Ui == null).length > 1 ? 's' : ''} nouvelle${X.opaques.filter(o => o.Ui == null).length > 1 ? 's' : ''} ou isolée${X.opaques.filter(o => o.Ui == null).length > 1 ? 's' : ''} et ${X.opaques.filter(o => o.Ui != null && o.U != null && o.U >= o.Ui).length} conservée${X.opaques.filter(o => o.Ui != null && o.U != null && o.U >= o.Ui).length > 1 ? 's' : ''} en l'état, d'après la description des parois opaques.`]);
+  if (b.tic) F.push(['Journée chaude', `La température intérieure maximale atteindrait <b>${fmt(b.tic.val)} °C</b>, pour une référence de ${fmt(b.tic.max)} °C.`]);
+  const RC = costOf(b, COST_REF);
+  if (RC && RC.perLog) F.push(['Charges énergétiques', `Environ <b>${eur(Math.round(RC.perLog / 10) * 10)} par logement et par an</b> après travaux, aux prix actuels (hors électroménager). <button type="button" class="linkbtn" data-mode="charges">Faire varier les prix</button>`]);
+  return `<section class="block"><h2>Ce qu'il faut retenir</h2><div class="facts">${F.map(([t, p]) => `<div class="fact"><div class="eyebrow">${esc(t)}</div><p>${p}</p></div>`).join('')}</div></section>`;
+}
+
+/* ---------- Analyse détaillée RT existant ---------- */
+function detailEx(M, b) {
+  const X = b.rtex, parts = [];
+  parts.push(['d-ind', 'Indicateurs', detIndicators(M)]);
+  const U3 = (t, d = 1) => `<td class="r">${fmtFixed(t.initial, d)}</td><td class="r">${fmtFixed(t.projet, d)}</td><td class="r">${fmtFixed(t.reference, d)}</td>`;
+  const rows = POSTES.filter(([k]) => ['initial', 'projet', 'reference'].some(w => X.rc[w][k]?.cef)).map(([k, l]) => `<tr><td>${esc(l)}</td>${['initial', 'projet', 'reference'].map(w => `<td class="r">${fmt(X.rc[w][k]?.cef || 0, 0)}</td>`).join('')}<td class="note">${esc(Object.keys(b.cep.postes[k]?.byVec || {}).map(v => VECTEURS[v] || v).join(', '))}</td></tr>`).join('');
+  const sumW = w => POSTES.reduce((s, [k]) => s + (X.rc[w][k]?.cef || 0), 0);
+  const epRows = POSTES.filter(([k]) => (b.cep.postes[k]?.cep || 0) + (b.cepRef.postes[k]?.cep || 0) > 0).map(([k, l]) => `<tr><td>${esc(l)}</td><td class="r">${fmtFixed(b.cep.postes[k]?.cef)}</td><td class="r">${fmtFixed(b.cep.postes[k]?.cep)}</td><td class="r">${fmtFixed(b.cepRef.postes[k]?.cep)}</td></tr>`).join('');
+  parts.push(['d-energie', 'Énergie', `<h2>Énergie</h2><div class="grid2">
+    <div class="panel"><h3>Consommation finale par usage <small>kWh/an, bâtiment entier</small></h3><div class="tbl"><table><thead><tr><th>Usage</th><th class="r">Initial</th><th class="r">Projet</th><th class="r">Référence</th><th>Énergie (projet)</th></tr></thead><tbody>${rows}
+      <tr class="total"><td>Total</td>${['initial', 'projet', 'reference'].map(w => `<td class="r">${fmt(sumW(w), 0)}</td>`).join('')}<td></td></tr></tbody></table></div></div>
+    <div class="panel"><h3>Énergie primaire par usage <small>kWhep/(m² SHON.an)</small></h3><div class="tbl"><table><thead><tr><th>Usage</th><th class="r">Cef projet</th><th class="r">Cep projet</th><th class="r">Cep réf.</th></tr></thead><tbody>${epRows}
+      <tr class="total"><td>Total</td><td class="r">${fmtFixed(b.cep.cef)}</td><td class="r">${fmtFixed(b.cep.cep)}</td><td class="r">${fmtFixed(b.cepRef.cep)}</td></tr></tbody></table></div>
+      <div class="chips"><span class="chip">Cep initial <b>${fmt(X.cep.initial)}</b></span>${X.cepP != null ? `<span class="chip">Cep ch+fr+ECS <b>${fmt(X.cepP)}</b></span>` : ''}${X.cepMax != null ? `<span class="chip">Cep max <b>${fmt(X.cepMax)}</b></span>` : ''}</div></div>
+    <div class="panel" style="grid-column:1/-1"><h3>Besoins <small>kWh/an</small></h3><div class="tbl"><table><thead><tr><th>Besoin</th><th class="r">Initial</th><th class="r">Projet</th><th class="r">Référence</th></tr></thead><tbody>
+      <tr><td>Chauffage</td>${U3(X.besoins.ch, 0)}</tr><tr><td>Refroidissement</td>${U3(X.besoins.fr, 0)}</tr><tr><td>Eau chaude sanitaire</td>${U3(X.besoins.ecs, 0)}</tr></tbody></table></div></div></div>`]);
+  if (b.tic) parts.push(['d-confort', 'Confort d’été', detConfort(b)]);
+  const clsRows = X.classes.map(c => `<tr><td class="mono">${esc(/^(a|L)\d+$/.test(c.c) ? c.c.toUpperCase() : pretty(c.c))}</td><td class="r">${fmtFixed(c.u.initial, 3)}</td><td class="r">${fmtFixed(c.u.projet, 3)}</td><td class="r">${fmtFixed(c.u.reference, 3)}</td><td class="r">${fmt(c.h.initial, 0)}</td><td class="r">${fmt(c.h.projet, 0)}</td><td class="r">${fmt(c.h.reference, 0)}</td></tr>`).join('');
+  const uCell = (i, p, r, d = 2) => `<td class="r">${i != null ? fmtFixed(i, d) : '<span class="note">neuve</span>'}</td><td class="r"><b>${fmtFixed(p, d)}</b></td><td class="r">${fmtFixed(r, d)}</td>`;
+  parts.push(['d-enveloppe', 'Enveloppe', `<h2>Enveloppe</h2>
+    <div class="chips"><span class="chip">Ubat initial <b>${fmt(X.ubat.initial, 3)}</b></span><span class="chip">Ubat projet <b>${fmt(X.ubat.projet, 3)}</b></span><span class="chip">Ubat réf. <b>${fmt(X.ubat.reference, 3)}</b></span><span class="chip">Ubat max <b>${fmt(X.ubat.max, 3)}</b></span><span class="chip">Pertes par les parois (H<sub>T</sub>) <b>${fmt(X.htot.initial, 0)} → ${fmt(X.htot.projet, 0)}</b> W/K</span></div>
+    <div class="panel"><h3>Déperditions par classe de paroi <small>classes de l'article 21 de l'arrêté du 13 juin 2008</small></h3><div class="tbl"><table><thead><tr><th>Classe</th><th class="r">U initial</th><th class="r">U projet</th><th class="r">U réf.</th><th class="r">Pertes initiales (W/K)</th><th class="r">Pertes projet (W/K)</th><th class="r">Pertes réf. (W/K)</th></tr></thead><tbody>${clsRows}
+      <tr class="total"><td>Total</td><td></td><td></td><td></td><td class="r">${fmt(X.htot.initial, 0)}</td><td class="r">${fmt(X.htot.projet, 0)}</td><td class="r">${fmt(X.htot.reference, 0)}</td></tr></tbody></table></div>
+      <p class="note">A1 à A7 : parois et baies, en W/(m².K) ; L8 à L10 : ponts thermiques, ψ en W/(m.K).</p></div>
+    <div class="grid2" style="margin-top:16px">
+    <div class="panel"><h3>Parois opaques <small>${X.opaques.length} entrées</small></h3><div class="tbl" style="max-height:440px;overflow:auto"><table><thead><tr><th>Paroi</th><th class="r">Surface</th><th class="r">U initial</th><th class="r">U projet</th><th class="r">U réf.</th></tr></thead><tbody>
+      ${X.opaques.slice().sort((a, c) => (c.S || 0) - (a.S || 0)).map(o => `<tr><td>${esc(o.name)}<br><span class="note">${esc(pretty(o.groupe))}${o.R ? ' · R isolant ' + fmt(o.R, 2) : ''}</span></td><td class="r">${fmtFixed(o.S)}</td>${uCell(o.Ui, o.U, o.Uref)}</tr>`).join('')}</tbody></table></div></div>
+    <div class="panel"><h3>Baies vitrées <small>${X.vitrees.length} entrées</small></h3><div class="tbl" style="max-height:440px;overflow:auto"><table><thead><tr><th>Baie</th><th class="r">Surface</th><th class="r">Uw initial</th><th class="r">Uw projet</th><th class="r">Uw réf.</th></tr></thead><tbody>
+      ${X.vitrees.slice().sort((a, c) => (c.S || 0) - (a.S || 0)).map(o => `<tr><td>${esc(o.name)}${o.Ug != null ? `<br><span class="note">Ug ${fmt(o.Ug, 2)}</span>` : ''}</td><td class="r">${fmtFixed(o.S)}</td>${uCell(o.Ui, o.U, o.Uref)}</tr>`).join('')}</tbody></table></div></div>
+    <div class="panel" style="grid-column:1/-1"><h3>Ponts thermiques <small>${X.liaisons.length} liaisons</small></h3><div class="tbl" style="max-height:440px;overflow:auto"><table><thead><tr><th>Liaison</th><th class="r">Linéaire (m)</th><th class="r">ψ initial</th><th class="r">ψ projet</th><th class="r">ψ réf.</th></tr></thead><tbody>
+      ${X.liaisons.slice().sort((a, c) => (c.psi || 0) * (c.L || 0) - (a.psi || 0) * (a.L || 0)).map(l => `<tr><td>${esc(pretty(l.type))}</td><td class="r">${fmtFixed(l.L)}</td>${uCell(l.psiI, l.psi, l.psiRef)}</tr>`).join('')}</tbody></table></div></div></div>`]);
+  const m = M.meta;
+  const t = rs => `<div class="tbl"><table><tbody>${rs.filter(r => r[1]).map(([k, v]) => `<tr><th style="width:38%;font-weight:600;color:var(--ink-2)">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>`;
+  parts.push(['d-projet', 'Projet', `<h2>Projet et bâtiment</h2><div class="grid2"><div class="panel"><h3>Opération</h3>${t([
+    ['Opération', m.operation], ['Adresse', m.adresse ? [m.adresse.rue, [m.adresse.cp, m.adresse.ville].filter(Boolean).join(' ')].filter(Boolean).join(', ') : ''], ['Réglementation', 'RT existant globale (Th-C-E ex)'],
+    ['Permis', m.permis], ['Zone climatique / altitude', `${m.zone || '–'} · ${fmt(m.altitude, 0)} m${m.departement ? ' · département ' + m.departement : ''}`],
+    ['Bureau de contrôle', m.controle], ['Logiciel', m.logiciel ? `${m.logiciel.nom} ${m.logiciel.version} (${m.logiciel.editeur}), étude du ${fdate(m.logiciel.date)}` : ''], ['Moteur de calcul', m.logiciel?.moteur], ['Version du format', m.versionSchema]])}</div>
+    <div class="panel"><h3>${esc(b.name)}</h3>${t([['Année de construction', b.annee ? String(b.annee) : ''], ['SHON', `${fmtFixed(b.sref)} m²`], ['Surface utile', b.shab ? `${fmtFixed(b.shab)} m²` : ''], ['Logements', fmt(b.logements, 0)],
+      ['Générateurs', X.generateurs.map(g => `${g.nom}${g.puissance ? ' (' + fmt(g.puissance, 0) + ' kW)' : ''}`).join(' ; ')]])}</div></div>`]);
+  return `<section class="block"><nav class="subnav" aria-label="Sections">${parts.map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</nav></section>
+    ${parts.map(([id, l, html]) => `<section class="block" id="${id}">${html}</section>`).join('')}`;
+}
+
+/* ---------- DPE : l'essentiel ---------- */
+const LOCATION = [['G', '1er janvier 2025'], ['F', '1er janvier 2028'], ['E', '1er janvier 2034']];
+function dpeScale(kind, cls, value, unit, seuils) {
+  const prefix = kind === 'ep' ? 'dpe' : 'ges';
+  const ranges = CLASSES.map((c, i) => i === 0 ? `≤ ${seuils[0]}` : i === 6 ? `> ${seuils[5]}` : `${seuils[i - 1] + 1} à ${seuils[i]}`);
+  return `<div class="scale" role="img" aria-label="Classe ${cls}">${CLASSES.map((c, i) => `<div class="sc-row ${c === cls ? 'on' : ''}">
+    <span class="sc-bar" style="width:${38 + i * 9}%;background:var(--${prefix}-${c.toLowerCase()});color:var(--${prefix}-${c.toLowerCase()}-ink)"><b>${c}</b><small>${ranges[i]}</small></span>
+    ${c === cls ? `<span class="sc-mark"><b>${fmt(value, 0)}</b> ${unit}</span>` : ''}</div>`).join('')}</div>`;
+}
+function essentielDPE(M, b) {
+  const D = b.dpe, rank = c => CLASSES.indexOf(c);
+  const cal = LOCATION.map(([c, d]) => ({ c, d, hit: rank(D.classe) >= rank(c) }));
+  const first = cal.find(x => x.hit);
+  const valid = M.meta.dateEtab ? new Date(new Date(M.meta.dateEtab).setFullYear(new Date(M.meta.dateEtab).getFullYear() + 10)) : null;
+  const R = D.reforme;
+  const perLogEF = D.ef.total && b.logements ? D.ef.total / b.logements : null;
+  const topDep = D.deperd.slice().sort((a, c) => c.v - a.v)[0], depTot = D.deperd.reduce((s, x) => s + x.v, 0);
+  const ch = D.chauffage[0];
+  const F = [];
+  if (ch) F.push(['Chauffage', `${esc([ch.gens.map(g => g.d).filter(Boolean).join(', '), ch.ems.join(', ')].filter(Boolean).join(' · ') || ch.install)}.`]);
+  if (D.ecs[0]) F.push(['Eau chaude', esc(D.ecs[0].install || D.ecs[0].gens.map(g => g.d).join(', ')) + '.']);
+  if (perLogEF) F.push(['Consommation', `Environ <b>${fmt(Math.round(perLogEF / 100) * 100, 0)} kWh par logement et par an</b> pour le chauffage, l'eau chaude, l'éclairage et la ventilation (énergie finale).`]);
+  if (D.cout.total) F.push(['Facture estimée par le DPE', `Entre <b>${eur(D.cout.total / b.logements)}</b> et <b>${eur((D.cout.total + ['ch', 'ecs', 'fr'].reduce((s, k) => s + ((D.cout[k + '_dep'] ?? D.cout[k]) - D.cout[k]), 0)) / b.logements)}</b> par logement et par an, selon que l'usage est conventionnel ou « dépensier ». <button type="button" class="linkbtn" data-mode="charges">Faire varier les prix</button>`]);
+  if (topDep && depTot) F.push(['Où part la chaleur', `<b>${esc(topDep.l)}</b> : ${pct(topDep.v / depTot)} des pertes de chaleur du bâtiment.`]);
+  return `<section class="block" aria-labelledby="h-dpe">
+      <h2 id="h-dpe" class="eyebrow" style="font-family:var(--f-body);font-size:.76rem;font-weight:600">Étiquette du diagnostic de performance énergétique</h2>
+      <div class="dpe-card">
+        <div class="dpe-head"><div class="dpe-big" style="background:var(--dpe-${D.classe.toLowerCase()});color:var(--dpe-${D.classe.toLowerCase()}-ink)">${esc(D.classe)}</div>
+          <div><h3>Classe ${esc(D.classe)}${b.logements > 1 ? ' pour l’immeuble' : ''}</h3>
+          <p>La classe retenue est la moins bonne des deux étiquettes : énergie <b>${esc(D.classeEp || '–')}</b> (${fmt(D.epM2, 0)} kWh/m²/an) et climat <b>${esc(D.classeGes)}</b> (${fmt(D.gesM2, 0)} kg CO₂/m²/an).${D.classeEp && D.classeEp !== D.classe ? ` Ici, c'est l'étiquette ${rank(D.classeGes) > rank(D.classeEp) ? 'climat' : 'énergie'} qui détermine la classe.` : ''}</p></div></div>
+        <div class="grid2">
+          <div><span class="eyebrow">Énergie · kWh d'énergie primaire par m² et par an</span>${dpeScale('ep', D.classeEp, D.epM2, 'kWh/m²/an', DPE_SEUILS.ep)}</div>
+          <div><span class="eyebrow">Climat · kg d'équivalent CO₂ par m² et par an</span>${dpeScale('ges', D.classeGes, D.gesM2, 'kg CO₂/m²/an', DPE_SEUILS.ges)}</div>
+        </div>
+        <p class="note">Établi le ${fdate(M.meta.dateEtab)}${valid ? `, valable jusqu'au ${fdate(valid.toISOString().slice(0, 10))}` : ''}.${b.logements > 1 ? ' Pour un immeuble, chaque logement peut avoir une classe différente de celle du bâtiment.' : ''}</p>
+      </div></section>
+    ${R ? `<section class="block"><div class="callout"><b>Nouveau calcul de 2026.</b> Depuis le 1er janvier 2026, l'électricité est comptée avec un coefficient de 1,9 au lieu de 2,3. Avec ce coefficient, ce bâtiment consommerait environ <b>${fmt(R.epM2, 0)} kWh/m²/an</b> d'énergie primaire, soit une classe <b>${esc(R.classe)}</b>${R.classe !== D.classe ? ` au lieu de ${esc(D.classe)}` : ', inchangée'}. Estimation indicative : la classe officielle se met à jour par une attestation sur le site de l'ADEME, sans refaire le DPE.</div></section>` : ''}
+    <section class="block"><div><h2>Location : ce que dit le calendrier</h2></div>
+      <p class="lede">La loi Climat et résilience interdit progressivement de louer les logements les plus énergivores (nouveau bail ou renouvellement, en métropole).</p>
+      <div class="cal">${cal.map(x => `<div class="cal-step ${x.hit ? 'hit' : ''}"><span class="cal-c" style="background:var(--dpe-${x.c.toLowerCase()});color:var(--dpe-${x.c.toLowerCase()}-ink)">${x.c}</span><b>${x.d}</b><span>${x.hit ? pill({ k: 'bad' }, 'Concerné') : pill({ k: 'ok' }, 'Non concerné')}</span></div>`).join('')}</div>
+      <p class="say">${first ? `Classé ${esc(D.classe)}, ce bâtiment ne pourra plus être loué à partir du <b>${first.d}</b> sans travaux.` : `Classé ${esc(D.classe)}, ce bâtiment n'est concerné par aucune interdiction de location prévue à ce jour.`}${R && R.classe !== D.classe ? ` Avec la classe ${esc(R.classe)} issue du calcul 2026, ${LOCATION.find(([c]) => rank(R.classe) >= rank(c)) ? 'l’échéance devient le ' + LOCATION.find(([c]) => rank(R.classe) >= rank(c))[1] : 'il ne serait plus concerné'}.` : ''}</p>
+    </section>
+    ${D.qualite.length ? `<section class="block"><h2>Qualité de l'isolation</h2><div class="chips">${D.qualite.map(q => `<span class="pill ${QUAL[q.v]?.[1] || 'na'}">${ICON[QUAL[q.v]?.[1] || 'na']}${esc(q.l)} : ${esc(QUAL[q.v]?.[0] || '–')}</span>`).join('')}</div></section>` : ''}
+    ${F.length ? `<section class="block"><h2>Ce qu'il faut retenir</h2><div class="facts">${F.map(([t, p]) => `<div class="fact"><div class="eyebrow">${esc(t)}</div><p>${p}</p></div>`).join('')}</div></section>` : ''}`;
+}
+
+/* ---------- DPE : analyse détaillée ---------- */
+function detailDPE(M, b) {
+  const D = b.dpe, parts = [];
+  const U = [['ch', 'Chauffage'], ['ecs', 'Eau chaude sanitaire'], ['fr', 'Refroidissement'], ['ecl', 'Éclairage'], ['auxvent', 'Ventilation (auxiliaires)'], ['auxdist', 'Autres auxiliaires']].filter(([k]) => D.ef[k] || D.ep[k] || D.cout[k]);
+  parts.push(['d-res', 'Résultats', `<h2>Résultats par usage</h2><div class="panel"><div class="tbl"><table><thead><tr><th>Usage</th><th class="r">Énergie finale (kWh/an)</th><th class="r">Énergie primaire (kWh/an)</th><th class="r">Émissions (kg CO₂/an)</th><th class="r">Coût (€/an)</th><th class="r">Coût usage dépensier</th></tr></thead><tbody>
+    ${U.map(([k, l]) => `<tr><td>${l}</td><td class="r">${fmt(D.ef[k], 0)}</td><td class="r">${fmt(D.ep[k], 0)}</td><td class="r">${fmt(D.ges[k], 0)}</td><td class="r">${eur(D.cout[k])}</td><td class="r">${D.cout[k + '_dep'] != null ? eur(D.cout[k + '_dep']) : '–'}</td></tr>`).join('')}
+    <tr class="total"><td>Total 5 usages</td><td class="r">${fmt(D.ef.total, 0)}</td><td class="r">${fmt(D.ep.total, 0)}</td><td class="r">${fmt(D.ges.total, 0)}</td><td class="r">${eur(D.cout.total)}</td><td></td></tr>
+    <tr class="sub"><td>Par m² habitable</td><td class="r">${fmt(D.ef.m2, 1)}</td><td class="r">${fmt(D.ep.m2, 1)}</td><td class="r">${fmt(D.ges.m2, 1)}</td><td class="r">${eur(D.cout.total / b.sref, 2)}</td><td></td></tr></tbody></table></div>
+    <div class="chips">${D.parEnergie.map(e => `<span class="chip">${esc(VECTEURS[e.vec] || 'Énergie ' + e.id)} <b>${fmt(e.conso, 0)}</b> kWh/an · ${eur(e.cout)}</span>`).join('')}<span class="chip">Ubat <b>${fmt(D.ubat, 3)}</b> W/(m².K)</span>${D.besoins.ch ? `<span class="chip">Besoin de chauffage <b>${fmt(D.besoins.ch, 0)}</b> kWh/an</span>` : ''}</div>
+    <p class="note">Coûts calculés par le DPE avec ses propres prix de l'énergie. « Dépensier » : chauffage à 21 °C et eau chaude plus abondante, selon la méthode 3CL.</p></div>`]);
+  const dt = D.deperd.reduce((s, x) => s + x.v, 0);
+  parts.push(['d-dep', 'Déperditions', `<h2>Déperditions et isolation</h2><div class="grid2">
+    <div class="panel"><h3>Pertes de chaleur par poste <small>W/K</small></h3>${hbars(D.deperd.filter(x => x.v > 0).sort((a, c) => c.v - a.v).map(x => ({ name: x.l, v: x.v, share: dt ? x.v / dt : null })), { d: 0 })}</div>
+    <div class="panel"><h3>Qualité de l'isolation</h3><div class="tbl"><table><tbody>${D.qualite.map(q => `<tr><td>${esc(q.l)}</td><td>${pill({ k: QUAL[q.v]?.[1] || 'na' }, QUAL[q.v]?.[0] || '–')}</td></tr>`).join('')}</tbody></table></div><p class="note">Appréciation calculée par le DPE pour chaque type de paroi.</p></div></div>`]);
+  const tbl = (title, rows, cols) => rows.length ? `<div class="panel"><h3>${title} <small>${rows.length} entrées</small></h3><div class="tbl" style="max-height:380px;overflow:auto"><table><thead><tr>${cols.map(c => `<th class="${c[2] || ''}">${c[0]}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td class="${c[2] || ''}">${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>` : '';
+  const ref = r => `${esc(r.desc || r.ref || '–')}${r.desc && r.ref ? `<br><span class="note mono">${esc(r.ref)}</span>` : ''}`;
+  parts.push(['d-env', 'Enveloppe', `<h2>Enveloppe</h2><div class="grid2">
+    ${tbl('Murs', D.murs, [['Paroi', ref], ['Surface (m²)', r => fmtFixed(r.S), 'r'], ['U', r => fmtFixed(r.U, 2), 'r'], ['b', r => fmtFixed(r.b, 2), 'r']])}
+    ${tbl('Planchers bas', D.pb, [['Paroi', ref], ['Surface (m²)', r => fmtFixed(r.S), 'r'], ['U', r => fmtFixed(r.U, 2), 'r'], ['b', r => fmtFixed(r.b, 2), 'r']])}
+    ${tbl('Planchers hauts', D.ph, [['Paroi', ref], ['Surface (m²)', r => fmtFixed(r.S), 'r'], ['U', r => fmtFixed(r.U, 2), 'r'], ['b', r => fmtFixed(r.b, 2), 'r']])}
+    ${tbl('Baies vitrées', D.baies, [['Baie', ref], ['Nb', r => fmt(r.n, 0), 'r'], ['Surface (m²)', r => fmtFixed(r.S), 'r'], ['Uw', r => fmtFixed(r.U, 2), 'r'], ['Sw', r => fmtFixed(r.Sw, 2), 'r']])}
+    ${tbl('Portes', D.portes, [['Porte', ref], ['Surface (m²)', r => fmtFixed(r.S), 'r'], ['U', r => fmtFixed(r.U, 2), 'r']])}
+    ${tbl('Ponts thermiques', D.ponts.slice().sort((a, c) => (c.L || 0) * (c.k || 0) - (a.L || 0) * (a.k || 0)), [['Liaison', r => esc(r.desc)], ['Linéaire (m)', r => fmtFixed(r.L), 'r'], ['ψ', r => fmtFixed(r.k, 2), 'r'], ['ψ·L (W/K)', r => fmtFixed((r.L || 0) * (r.k || 0)), 'r']])}
+  </div>`]);
+  const sys = (title, L) => L.length ? `<div class="panel"><h3>${title}</h3>${L.map(i => `<p><b>${esc(i.install || '–')}</b></p><ul class="ul">${i.gens.map(g => `<li>${esc(g.d || 'Générateur')} <span class="note">· ${esc(VECTEURS[g.vec] || '')}</span></li>`).join('')}${i.ems.map(e => `<li>Émetteur : ${esc(e)}</li>`).join('')}</ul>`).join('')}</div>` : '';
+  parts.push(['d-sys', 'Systèmes', `<h2>Systèmes</h2><div class="grid2">${sys('Chauffage', D.chauffage)}${sys('Eau chaude sanitaire', D.ecs)}</div>`]);
+  const m = M.meta, valid = m.dateEtab ? new Date(new Date(m.dateEtab).setFullYear(new Date(m.dateEtab).getFullYear() + 10)).toISOString().slice(0, 10) : '';
+  const t = rs => `<div class="tbl"><table><tbody>${rs.filter(r => r[1]).map(([k, v]) => `<tr><th style="width:38%;font-weight:600;color:var(--ink-2)">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table></div>`;
+  parts.push(['d-adm', 'Diagnostic', `<h2>Diagnostic et bâtiment</h2><div class="grid2"><div class="panel"><h3>Diagnostic</h3>${t([['Numéro', m.numero], ['Visite', fdate(m.dateVisite)], ['Établi le', fdate(m.dateEtab)], ['Valable jusqu’au', valid ? fdate(valid) : ''], ['Diagnostiqueur', [m.bet, m.entreprise].filter(Boolean).join(' · ')], ['Certification', m.certification], ['Logiciel', m.logiciel?.nom], ['Moteur de calcul', m.logiciel?.moteur], ['Version de la méthode', m.methode], ['Version du format', m.versionSchema]])}</div>
+    <div class="panel"><h3>Bâtiment</h3>${t([['Adresse', m.adresse ? [m.adresse.rue, [m.adresse.cp, m.adresse.ville].filter(Boolean).join(' ')].filter(Boolean).join(', ') : ''], ['Référence', b.name], ['Propriétaire', m.moa], ['Année de construction', b.annee ? String(b.annee) : ''], ['Logements', fmt(b.logements, 0)], ['Surface habitable', `${fmtFixed(b.sref)} m²`], ['Niveaux', fmt(b.niveaux, 0)], ['Hauteur sous plafond', b.hsp ? fmt(b.hsp, 2) + ' m' : ''], ['Zone climatique / altitude', `${m.zone || '–'} · ${fmt(m.altitude, 0)} m`]])}</div></div>
+    ${D.gestes.length ? `<div class="panel" style="margin-top:16px"><h3>Gestes d'entretien recommandés</h3><ul class="ul">${D.gestes.map(g => `<li>${esc(g)}</li>`).join('')}</ul></div>` : ''}`]);
+  return `<section class="block"><nav class="subnav" aria-label="Sections">${parts.map(([id, l]) => `<a href="#${id}">${l}</a>`).join('')}</nav></section>
+    ${parts.map(([id, l, html]) => `<section class="block" id="${id}">${html}</section>`).join('')}`;
+}
+
+/* ========================================================================
+   5. ÉVÉNEMENTS
+   ======================================================================== */
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => { t.hidden = true; }, 2200); }
+function showError(msg) { const e = document.getElementById('error'); e.textContent = msg; e.hidden = !msg; }
+
+async function loadFile(file) {
+  showError('');
+  try {
+    const buf = await file.arrayBuffer();
+    const model = parseAny(decodeXML(buf));
+    state.model = model; state.sample = false; state.fileName = file.name; state.bi = 0;
+    render(); window.scrollTo({ top: 0 });
+  } catch (err) {
+    showError(`Lecture impossible de « ${file.name} » : ${err.message}`);
+  }
+}
+
+document.addEventListener('click', async e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.matches('[data-open]') || t.id === 'btn-open') document.getElementById('file').click();
+  else if (t.dataset.mode) { state.mode = t.dataset.mode; try { localStorage.setItem('re2020-mode', state.mode); } catch (err) {} render(); }
+  else if (t.dataset.bi != null) { state.bi = +t.dataset.bi; state.cost.surface = null; render(); }
+  else if (t.matches('[data-cost-reset]')) { const s = state.cost.surface; state.cost = JSON.parse(JSON.stringify(COST_REF)); state.cost.surface = null; render(); }
+  else if (t.matches('[data-copy-csv]')) {
+    const csv = indicatorsCSV(state.model);
+    try { await navigator.clipboard.writeText(csv); toast('Tableau copié : collez-le dans votre tableur.'); }
+    catch (err) { const ta = document.createElement('textarea'); ta.value = csv; t.after(ta); ta.style.width = '100%'; ta.rows = 6; ta.select(); toast('Copie bloquée : le texte est sélectionné, copiez-le avec Ctrl+C.'); }
+  }
+});
+document.addEventListener('input', e => { if (['f-q', 'f-lot', 'f-type'].includes(e.target.id)) renderProducts(); else onCostInput(e); });
+document.addEventListener('change', e => { if (e.target.id === 'autres') onCostInput(e); });
+document.getElementById('file').addEventListener('change', e => { const f = e.target.files[0]; if (f) loadFile(f); e.target.value = ''; });
+const drop = document.getElementById('drop');
+['dragenter', 'dragover'].forEach(ev => document.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach(ev => document.addEventListener(ev, e => { e.preventDefault(); if (ev === 'drop' || e.relatedTarget === null) drop.classList.remove('over'); }));
+document.addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (f) loadFile(f); });
+
+const rerender = () => { if (!state.model) return; if (state.mode === 'detail') { state.charts.forEach(c => c.destroy()); state.charts = []; drawCharts(state.model.buildings[state.bi]); } else if (state.mode === 'charges') { state.charts.forEach(c => c.destroy()); state.charts = []; state.sensChart = null; updateCost(); } };
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', rerender); } catch (e) {}
+new MutationObserver(rerender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+/* Démarrage : exemple embarqué s'il existe */
+(function boot() {
+  try {
+    const raw = document.getElementById('sample').textContent.trim();
+    if (raw && raw !== '__SAMPLE__') { state.model = JSON.parse(raw); state.sample = true; }
+  } catch (e) {}
+  render();
+})();
+</script>
